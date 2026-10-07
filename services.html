@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services & Programs - Kids Theater & Drama Workshop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none'%3E%3Cpath d='M16 2L20 12L30 12L22 18L25 28L16 22L7 28L10 18L2 12L12 12L16 2Z' fill='%236366F1'/%3E%3C/svg%3E">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontWeight: {
+                        semibold: '500',
+                        bold: '600',
+                        extrabold: '800',
+                        black: '900'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* === RESET & CORE === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            transition: background-color 0.3s, color 0.3s;
+            overflow-x: hidden;
+        }
+
+        /* === THEME VARIABLES === */
+        :root {
+            --bg-color: #FAFAFA;
+            --bg-secondary: #F3F4F6;
+            --bg-card: #FFFFFF;
+            --text-main: #111827;
+            --text-muted: #6B7280;
+            --accent-color: #6366F1;
+            --accent-dark: #4F46E5;
+            --border-color: #E5E7EB;
+            --nav-bg: rgba(255, 255, 255, 0.85);
+            --drawer-bg: rgba(255, 255, 255, 0.98);
+            --menu-hover-bg: #EEF2FF;
+        }
+
+        body.dark-mode {
+            --bg-color: #111827;
+            --bg-secondary: #1F2937;
+            --bg-card: #1F2937;
+            --text-main: #F9FAFB;
+            --text-muted: #9CA3AF;
+            --accent-color: #818CF8;
+            --accent-dark: #6366F1;
+            --border-color: #374151;
+            --nav-bg: rgba(17, 24, 39, 0.85);
+            --drawer-bg: rgba(17, 24, 39, 0.98);
+            --menu-hover-bg: rgba(99, 102, 241, 0.1);
+        }
+
+        [dir="rtl"] {
+            text-align: right;
+        }
+
+        [dir="rtl"] .ml-auto {
+            margin-right: auto;
+            margin-left: 0;
+        }
+
+        [dir="rtl"] .mr-auto {
+            margin-left: auto;
+            margin-right: 0;
+        }
+
+        @keyframes blob {
+            0% {
+                transform: translate(0px, 0px) scale(1);
+            }
+
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+
+            100% {
+                transform: translate(0px, 0px) scale(1);
+            }
+        }
+
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* === NAVBAR DESIGN === */
+        .navbar {
+            position: fixed;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 95%;
+            max-width: 1440px;
+            z-index: 1000;
+            background: var(--nav-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(99, 102, 241, 0.15);
+            border-radius: 9999px;
+            padding: 0 32px;
+            height: 75px;
+            display: flex;
+            align-items: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 40px -10px rgba(99, 102, 241, 0.1);
+        }
+
+        body.dark-mode .navbar {
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .navbar.scrolled {
+            top: 12px;
+            width: 95%;
+            border-radius: 9999px;
+            height: 70px;
+            border: 1px solid var(--border-color);
+            background: var(--nav-bg);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.15);
+        }
+
+        body.dark-mode .navbar.scrolled {
+            background: rgba(17, 24, 39, 0.95);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link {
+            padding: 8px 4px;
+            margin: 0 14px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--accent-color);
+        }
+
+        /* Dropdowns */
+        .dropdown {
+            position: relative;
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 65px;
+            left: 0;
+            transform: translateY(15px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 100;
+        }
+
+        .navbar.scrolled .dropdown-menu {
+            top: 55px;
+        }
+
+        .dropdown-inner {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            min-width: 240px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        body.dark-mode .dropdown-inner {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 12px 16px;
+            border-radius: 8px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.2s;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        .dropdown-item:hover {
+            background: var(--menu-hover-bg);
+            color: var(--accent-color);
+            transform: translateX(4px);
+        }
+
+        [dir="rtl"] .dropdown-item:hover {
+            transform: translateX(-4px);
+        }
+
+        /* === BUTTONS === */
+        .icon-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-weight: 800;
+        }
+
+        .icon-btn:hover {
+            background: var(--accent-color);
+            color: #fff;
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(99, 102, 241, 0.2);
+        }
+
+        .btn {
+            padding: 12px 28px;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 9999px;
+            border: none;
+        }
+
+        .btn-solid {
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-dark));
+            color: #FFFFFF !important;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-solid:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-outline {
+            background: var(--bg-secondary);
+            color: var(--accent-color) !important;
+        }
+
+        .btn-outline:hover {
+            background: var(--accent-color);
+            color: #FFFFFF !important;
+            transform: translateY(-2px);
+        }
+
+        /* MOBILE MENU */
+        .drawer-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(4px);
+        }
+
+        .drawer-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .fullscreen-menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            max-width: 400px;
+            height: 100dvh;
+            background: var(--drawer-bg);
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(100%);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border-left: 1px solid var(--border-color);
+        }
+
+        [dir="rtl"] .fullscreen-menu {
+            right: auto;
+            left: 0;
+            transform: translateX(-100%);
+            border-left: none;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .fullscreen-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        .mobile-link {
+            display: block;
+            width: 100%;
+            padding: 16px 32px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-main);
+            text-decoration: none;
+            transition: all 0.3s;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .mobile-link:hover {
+            color: var(--accent-color);
+            padding-left: 40px;
+            background: var(--menu-hover-bg);
+        }
+
+        [dir="rtl"] .mobile-link:hover {
+            padding-left: 32px;
+            padding-right: 40px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding-top: 80px;
+        }
+
+        body.dark-mode footer {
+            border-color: var(--border-color);
+        }
+
+        footer h4 {
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        footer a,
+        footer li,
+        footer span {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            font-weight: 400;
+        }
+
+        footer a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-link-circle {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            color: var(--text-main);
+            background: transparent;
+        }
+
+        .social-link-circle:hover {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+            color: #FFFFFF;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            padding: 32px 0;
+            margin-top: 60px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar" id="main-nav">
+        <div class="w-full flex items-center justify-between mx-auto">
+            <div class="flex items-center flex-shrink-0">
+                <a href="index.html" class="inline-flex items-center gap-3 text-2xl font-bold tracking-widest uppercase"
+                    style="color: var(--text-main) !important; text-decoration: none;">
+                    <i class="fas fa-masks-theater text-indigo-500 text-3xl"
+                        style="color: var(--accent-color, #6366F1);"></i>
+                    Kids Theater
+                </a>
+            </div>
+
+            <div class="hidden xl:flex justify-center items-center flex-1">
+                <div class="dropdown">
+                    <div class="nav-link">Home <i class="fas fa-chevron-down text-[9px] ml-1 opacity-50"></i></div>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-inner">
+                            <a href="index.html" class="dropdown-item">Home Page 1</a>
+                            <a href="home-2.html" class="dropdown-item">Home Page 2</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="services.html" class="nav-link active">Services</a>
+                <a href="schedule.html" class="nav-link">Schedule</a>
+                <a href="booking.html" class="nav-link">Booking</a>
+                <a href="faq.html" class="nav-link">FAQ</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <div class="dropdown">
+                    <div class="nav-link">Dashboard <i class="fas fa-chevron-down text-[9px] ml-1 opacity-50"></i></div>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-inner">
+                            <a href="user.html" class="dropdown-item">User Dashboard</a>
+                            <a href="admin.html" class="dropdown-item">Admin Dashboard</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hidden xl:flex items-center gap-3">
+                <button id="theme-toggle-desktop" class="icon-btn" title="Toggle Dark Mode">
+                    <i class="fas fa-moon" id="theme-icon-desktop"></i>
+                </button>
+                <button id="rtl-btn" class="icon-btn" title="Toggle LTR/RTL">
+                    LTR
+                </button>
+                <div class="w-px h-6 bg-[var(--border-color)] mx-2"></div>
+                <a href="login.html" class="btn btn-solid !w-[100px] !h-[40px] !p-0 !text-[11px]">Login</a>
+            </div>
+
+            <div class="xl:hidden flex items-center justify-end gap-4">
+                <button id="mobile-btn"
+                    class="text-2xl text-[var(--text-main)] transition-colors hover:text-[var(--accent-color)]">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ================= HAMBURGER / MOBILE MENU ================= -->
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <div class="fullscreen-menu" id="fullscreen-menu">
+        <div class="w-full px-8 py-6 flex justify-between items-center shrink-0 border-b border-[var(--border-color)]">
+            <a href="index.html" class="text-xl font-bold tracking-widest uppercase block flex items-center gap-2"
+                style="color: var(--text-main) !important; text-decoration: none;">
+                <i class="fas fa-masks-theater text-indigo-500" style="color: var(--accent-color, #6366F1);"></i> Kids
+                Theater
+            </a>
+            <button id="close-menu"
+                class="w-10 h-10 rounded-full flex items-center justify-center transition-all text-xl text-[var(--text-main)] hover:bg-[var(--bg-secondary)] hover:text-[var(--accent-color)]">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="flex flex-col w-full overflow-y-auto flex-1 py-4">
+            <a href="index.html" class="mobile-link">Home Page 1</a>
+            <a href="home-2.html" class="mobile-link">Home Page 2</a>
+            <a href="about.html" class="mobile-link">About</a>
+            <a href="services.html" class="mobile-link" style="color: var(--accent-color);">Services</a>
+            <a href="schedule.html" class="mobile-link">Schedule</a>
+            <a href="booking.html" class="mobile-link">Blog</a>
+            <a href="faq.html" class="mobile-link">FAQ</a>
+            <a href="contact.html" class="mobile-link">Contact</a>
+            <div class="px-8 mt-6 mb-2">
+                <span
+                    class="text-[10px] font-semibold text-[var(--text-muted)] uppercase tracking-widest">Portals</span>
+            </div>
+            <a href="user.html" class="mobile-link !text-sm text-[var(--text-muted)]">User Dashboard</a>
+            <a href="admin.html" class="mobile-link !text-sm text-[var(--text-muted)]">Admin Dashboard</a>
+        </div>
+        <div
+            class="w-full px-8 py-8 border-t border-[var(--border-color)] flex flex-col gap-6 shrink-0 bg-[var(--bg-secondary)]">
+            <div class="flex justify-between items-center w-full">
+                <div class="flex items-center gap-3">
+                    <span
+                        class="text-[var(--text-muted)] font-medium text-[10px] uppercase tracking-widest">Theme</span>
+                    <button id="theme-toggle-mobile" class="icon-btn">
+                        <i class="fas fa-moon" id="theme-icon-mobile"></i>
+                    </button>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="text-[var(--text-muted)] font-medium text-[10px] uppercase tracking-widest">Dir</span>
+                    <button id="rtl-toggle-mobile" class="icon-btn">LTR</button>
+                </div>
+            </div>
+            <div class="flex gap-4 w-full">
+                <a href="login.html" class="btn btn-outline flex-1 !py-3">Login</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= HERO BANNER (SERVICES SPECIFIC) ================= -->
+    <section
+        class="relative w-full min-h-[100dvh] pt-24 md:pt-32 pb-12 md:pb-16 flex items-center overflow-hidden bg-[var(--bg-color)] border-b border-[var(--border-color)]">
+        <!-- Decorative Background Elements -->
+        <div
+            class="absolute top-20 left-10 w-64 h-64 bg-indigo-300/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob">
+        </div>
+        <div
+            class="absolute top-40 right-10 w-64 h-64 bg-purple-300/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000">
+        </div>
+        <div
+            class="absolute -bottom-8 left-40 w-64 h-64 bg-pink-300/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000">
+        </div>
+
+        <div class="max-w-[1440px] mx-auto px-6 lg:px-12 w-full relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+                <!-- Text Content -->
+                <div class="flex flex-col items-start text-left max-w-2xl">
+                    <span
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--bg-card)] border border-[var(--border-color)] shadow-sm text-[var(--accent-color)] text-xs font-bold uppercase tracking-widest mb-6">
+                        <span class="relative flex h-2 w-2">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+                        </span>
+                        Our Programs & Classes
+                    </span>
+
+                    <h1
+                        class="text-5xl md:text-6xl lg:text-[4.5rem] font-black leading-[1.1] mb-6 text-[var(--text-main)] tracking-tight">
+                        Explore Creative <br>
+                        <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-[var(--accent-color)] to-purple-600">Workshops</span>
+                    </h1>
+
+                    <p class="text-[var(--text-muted)] text-lg md:text-xl leading-relaxed font-medium mb-8 max-w-lg">
+                        From beginner acting to advanced musical theater, explore our diverse range of programs designed
+                        to develop skills, build confidence, and ignite a lifelong passion for the performing arts.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-10">
+                        <a href="#services-grid"
+                            class="btn btn-solid !py-4 !px-8 text-sm flex items-center justify-center gap-2 group">
+                            <i class="fas fa-layer-group"></i> View Programs
+                        </a>
+                        <a href="signup.html"
+                            class="btn btn-outline !bg-[var(--bg-card)] !text-[var(--text-main)] hover:!border-[var(--accent-color)] hover:!text-[var(--accent-color)] !py-4 !px-8 text-sm flex items-center justify-center gap-2 shadow-sm">
+                            <i class="fas fa-ticket-alt"></i> Enroll Now
+                        </a>
+                    </div>
+
+                    <!-- Trust Indicators -->
+                    <div class="flex items-center gap-6 text-sm text-[var(--text-muted)] font-medium">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check-circle text-green-500"></i> Beginner to Advanced
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check-circle text-green-500"></i> Weekly Classes
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check-circle text-green-500"></i> Summer Camps
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Responsive Image Composition -->
+                <div class="relative w-full h-auto lg:h-[650px] flex items-center justify-center mt-10 lg:mt-0">
+                    <div
+                        class="relative w-full lg:w-[90%] h-[350px] sm:h-[450px] lg:h-[85%] rounded-[40px] overflow-hidden shadow-2xl border-4 border-[var(--bg-card)] z-20 transform lg:hover:-translate-y-2 transition-transform duration-500">
+                        <img src="images/theatre (1).jpg" alt="Kids participating in a acting workshop"
+                            class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= OUR SERVICES (6 CARDS GRID) ================= -->
+    <section id="services-grid" class="py-24 bg-[var(--bg-color)]">
+        <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-5xl font-black text-[var(--text-main)] mb-6 tracking-tight">Our Featured
+                    Programs</h2>
+                <p class="text-[var(--text-muted)] text-lg">Choose from our wide variety of specialized classes tailored
+                    to suit all ages and skill levels.</p>
+            </div>
+
+            <!-- CSS Grid for Uniform Heights -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10">
+
+                <!-- Card 1 -->
+                <div
+                    class="relative flex flex-col h-full bg-[var(--bg-card)] rounded-[2rem] border border-[var(--border-color)] overflow-hidden group hover:shadow-[0_20px_40px_-15px_rgba(99,102,241,0.2)] transition-all duration-500">
+                    <div class="h-56 sm:h-64 relative overflow-hidden shrink-0">
+                        <img src="images/theatre (2).jpg" alt="Musical Theater"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-[var(--bg-card)] via-transparent to-transparent opacity-90">
+                        </div>
+                    </div>
+                    <div class="px-8 pb-8 flex flex-col flex-grow relative -mt-8">
+                        <div
+                            class="absolute -top-12 right-8 w-16 h-16 bg-[var(--bg-color)] rounded-2xl flex items-center justify-center border border-[var(--border-color)] shadow-lg z-10 text-[var(--accent-color)] text-2xl group-hover:-translate-y-2 transition-transform duration-300">
+                            <i class="fas fa-microphone-alt"></i>
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-[var(--text-main)] mb-3 mt-4">Musical Theater</h3>
+                        <p class="text-[var(--text-muted)] text-sm leading-relaxed mb-8 flex-grow">Combine singing,
+                            dancing, and acting in our high-energy workshops. Perfect for triple-threat performers in
+                            training.</p>
+                        <a href="services-details.html"
+                            class="mt-auto w-full btn btn-outline !border-[var(--border-color)] hover:!border-[var(--accent-color)] flex items-center justify-between group/btn bg-[var(--bg-secondary)]">
+                            <span>Enquire Now</span>
+                            <i class="fas fa-arrow-right group-hover/btn:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div
+                    class="relative flex flex-col h-full bg-[var(--bg-card)] rounded-[2rem] border border-[var(--border-color)] overflow-hidden group hover:shadow-[0_20px_40px_-15px_rgba(99,102,241,0.2)] transition-all duration-500">
+                    <div class="h-56 sm:h-64 relative overflow-hidden shrink-0">
+                        <img src="images/theatre (3).jpg" alt="Beginner Acting"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-[var(--bg-card)] via-transparent to-transparent opacity-90">
+                        </div>
+                    </div>
+                    <div class="px-8 pb-8 flex flex-col flex-grow relative -mt-8">
+                        <div
+                            class="absolute -top-12 right-8 w-16 h-16 bg-[var(--bg-color)] rounded-2xl flex items-center justify-center border border-[var(--border-color)] shadow-lg z-10 text-[var(--accent-color)] text-2xl group-hover:-translate-y-2 transition-transform duration-300">
+                            <i class="fas fa-theater-masks"></i>
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-[var(--text-main)] mb-3 mt-4">Beginner Acting</h3>
+                        <p class="text-[var(--text-muted)] text-sm leading-relaxed mb-8 flex-grow">A fun introduction to
+                            stagecraft, character building, and script reading for young, aspiring stars.</p>
+                        <a href="services-details.html"
+                            class="mt-auto w-full btn btn-outline !border-[var(--border-color)] hover:!border-[var(--accent-color)] flex items-center justify-between group/btn bg-[var(--bg-secondary)]">
+                            <span>Enquire Now</span>
+                            <i class="fas fa-arrow-right group-hover/btn:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div
+                    class="relative flex flex-col h-full bg-[var(--bg-card)] rounded-[2rem] border border-[var(--border-color)] overflow-hidden group hover:shadow-[0_20px_40px_-15px_rgba(99,102,241,0.2)] transition-all duration-500">
+                    <div class="h-56 sm:h-64 relative overflow-hidden shrink-0">
+                        <img src="images/theatre (4).jpg" alt="Improv Comedy"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-[var(--bg-card)] via-transparent to-transparent opacity-90">
+                        </div>
+                    </div>
+                    <div class="px-8 pb-8 flex flex-col flex-grow relative -mt-8">
+                        <div
+                            class="absolute -top-12 right-8 w-16 h-16 bg-[var(--bg-color)] rounded-2xl flex items-center justify-center border border-[var(--border-color)] shadow-lg z-10 text-[var(--accent-color)] text-2xl group-hover:-translate-y-2 transition-transform duration-300">
+                            <i class="fas fa-laugh-beam"></i>
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-[var(--text-main)] mb-3 mt-4">Improv Comedy</h3>
+                        <p class="text-[var(--text-muted)] text-sm leading-relaxed mb-8 flex-grow">Think on your feet!
+                            Build confidence, quick thinking, and teamwork skills through hilarious unscripted games.
+                        </p>
+                        <a href="services-details.html"
+                            class="mt-auto w-full btn btn-outline !border-[var(--border-color)] hover:!border-[var(--accent-color)] flex items-center justify-between group/btn bg-[var(--bg-secondary)]">
+                            <span>Enquire Now</span>
+                            <i class="fas fa-arrow-right group-hover/btn:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div
+                    class="relative flex flex-col h-full bg-[var(--bg-card)] rounded-[2rem] border border-[var(--border-color)] overflow-hidden group hover:shadow-[0_20px_40px_-15px_rgba(99,102,241,0.2)] transition-all duration-500">
+                    <div class="h-56 sm:h-64 relative overflow-hidden shrink-0">
+                        <img src="images/theatre (5).jpg" alt="Voice & Diction"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-[var(--bg-card)] via-transparent to-transparent opacity-90">
+                        </div>
+                    </div>
+                    <div class="px-8 pb-8 flex flex-col flex-grow relative -mt-8">
+                        <div
+                            class="absolute -top-12 right-8 w-16 h-16 bg-[var(--bg-color)] rounded-2xl flex items-center justify-center border border-[var(--border-color)] shadow-lg z-10 text-[var(--accent-color)] text-2xl group-hover:-translate-y-2 transition-transform duration-300">
+                            <i class="fas fa-volume-up"></i>
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-[var(--text-main)] mb-3 mt-4">Voice & Diction</h3>
+                        <p class="text-[var(--text-muted)] text-sm leading-relaxed mb-8 flex-grow">Master articulation,
+                            projection, and vocal health. Essential training for public speaking and stage presence.</p>
+                        <a href="services-details.html"
+                            class="mt-auto w-full btn btn-outline !border-[var(--border-color)] hover:!border-[var(--accent-color)] flex items-center justify-between group/btn bg-[var(--bg-secondary)]">
+                            <span>Enquire Now</span>
+                            <i class="fas fa-arrow-right group-hover/btn:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div
+                    class="relative flex flex-col h-full bg-[var(--bg-card)] rounded-[2rem] border border-[var(--border-color)] overflow-hidden group hover:shadow-[0_20px_40px_-15px_rgba(99,102,241,0.2)] transition-all duration-500">
+                    <div class="h-56 sm:h-64 relative overflow-hidden shrink-0">
+                        <img src="images/theatre (6).jpg" alt="Stage Design & Tech"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-[var(--bg-card)] via-transparent to-transparent opacity-90">
+                        </div>
+                    </div>
+                    <div class="px-8 pb-8 flex flex-col flex-grow relative -mt-8">
+                        <div
+                            class="absolute -top-12 right-8 w-16 h-16 bg-[var(--bg-color)] rounded-2xl flex items-center justify-center border border-[var(--border-color)] shadow-lg z-10 text-[var(--accent-color)] text-2xl group-hover:-translate-y-2 transition-transform duration-300">
+                            <i class="fas fa-paint-roller"></i>
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-[var(--text-main)] mb-3 mt-4">Stage Tech & Arts</h3>
+                        <p class="text-[var(--text-muted)] text-sm leading-relaxed mb-8 flex-grow">Prefer
+                            behind-the-scenes? Learn set painting, prop making, lighting basics, and stage management.
+                        </p>
+                        <a href="services-details.html"
+                            class="mt-auto w-full btn btn-outline !border-[var(--border-color)] hover:!border-[var(--accent-color)] flex items-center justify-between group/btn bg-[var(--bg-secondary)]">
+                            <span>Enquire Now</span>
+                            <i class="fas fa-arrow-right group-hover/btn:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div
+                    class="relative flex flex-col h-full bg-[var(--bg-card)] rounded-[2rem] border border-[var(--border-color)] overflow-hidden group hover:shadow-[0_20px_40px_-15px_rgba(99,102,241,0.2)] transition-all duration-500">
+                    <div class="h-56 sm:h-64 relative overflow-hidden shrink-0">
+                        <img src="images/theatre (7).jpg" alt="Screen Acting"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-[var(--bg-card)] via-transparent to-transparent opacity-90">
+                        </div>
+                    </div>
+                    <div class="px-8 pb-8 flex flex-col flex-grow relative -mt-8">
+                        <div
+                            class="absolute -top-12 right-8 w-16 h-16 bg-[var(--bg-color)] rounded-2xl flex items-center justify-center border border-[var(--border-color)] shadow-lg z-10 text-[var(--accent-color)] text-2xl group-hover:-translate-y-2 transition-transform duration-300">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-[var(--text-main)] mb-3 mt-4">Screen Acting</h3>
+                        <p class="text-[var(--text-muted)] text-sm leading-relaxed mb-8 flex-grow">Adapt performance
+                            techniques for the camera. Covers audition skills, hitting marks, and emotional scaling.</p>
+                        <a href="services-details.html"
+                            class="mt-auto w-full btn btn-outline !border-[var(--border-color)] hover:!border-[var(--accent-color)] flex items-center justify-between group/btn bg-[var(--bg-secondary)]">
+                            <span>Enquire Now</span>
+                            <i class="fas fa-arrow-right group-hover/btn:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= EXTRA SECTION 1: WHY CHOOSE US ================= -->
+    <section class="py-24 bg-[var(--bg-secondary)] border-y border-[var(--border-color)]">
+        <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-4xl font-black text-[var(--text-main)] mb-6">Why Parents Choose Us</h2>
+                <p class="text-[var(--text-muted)] text-lg">We provide a nurturing environment where creativity thrives
+                    and lifelong skills are developed.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div
+                    class="bg-[var(--bg-card)] p-10 rounded-3xl border border-[var(--border-color)] text-center hover:-translate-y-2 transition-transform duration-300 shadow-sm hover:shadow-xl">
+                    <div
+                        class="w-20 h-20 mx-auto bg-indigo-100 dark:bg-indigo-900/30 text-[var(--accent-color)] rounded-full flex items-center justify-center text-3xl mb-6">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-[var(--text-main)] mb-4">Expert Instructors</h4>
+                    <p class="text-[var(--text-muted)] text-sm leading-relaxed">Our teachers are working industry
+                        professionals passionate about passing their craft down to the next generation.</p>
+                </div>
+                <!-- Feature 2 -->
+                <div
+                    class="bg-[var(--bg-card)] p-10 rounded-3xl border border-[var(--border-color)] text-center hover:-translate-y-2 transition-transform duration-300 shadow-sm hover:shadow-xl">
+                    <div
+                        class="w-20 h-20 mx-auto bg-green-100 dark:bg-green-900/30 text-green-500 rounded-full flex items-center justify-center text-3xl mb-6">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-[var(--text-main)] mb-4">Safe & Inclusive Space</h4>
+                    <p class="text-[var(--text-muted)] text-sm leading-relaxed">We strictly enforce zero-bullying
+                        policies and ensure every child has a supportive platform to express themselves safely.</p>
+                </div>
+                <!-- Feature 3 -->
+                <div
+                    class="bg-[var(--bg-card)] p-10 rounded-3xl border border-[var(--border-color)] text-center hover:-translate-y-2 transition-transform duration-300 shadow-sm hover:shadow-xl">
+                    <div
+                        class="w-20 h-20 mx-auto bg-purple-100 dark:bg-purple-900/30 text-purple-500 rounded-full flex items-center justify-center text-3xl mb-6">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-[var(--text-main)] mb-4">Confidence Building</h4>
+                    <p class="text-[var(--text-muted)] text-sm leading-relaxed">Beyond acting, our programs teach
+                        essential communication and teamwork skills that benefit children in everyday life.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= CHILD'S THEATER JOURNEY ================= -->
+    <section class="py-24 bg-[var(--bg-secondary)] border-y border-[var(--border-color)] overflow-hidden">
+        <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+
+            <!-- Section Heading -->
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full
+                bg-[var(--bg-card)] border border-[var(--border-color)]
+                text-[var(--accent-color)] text-xs font-bold uppercase tracking-widest mb-5">
+                    <i class="fas fa-sparkles"></i>
+                    The Theater Journey
+                </span>
+
+                <h2 class="text-3xl md:text-5xl font-black text-[var(--text-main)] mb-6 tracking-tight">
+                    From First Rehearsal
+                    <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-[var(--accent-color)] to-purple-600">
+                        To Center Stage
+                    </span>
+                </h2>
+
+                <p class="text-[var(--text-muted)] text-lg leading-relaxed">
+                    Every class is designed to help children discover their creativity,
+                    build confidence, and shine both on and off the stage.
+                </p>
+            </div>
+
+            <!-- Journey Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+
+                <!-- Connecting Line -->
+                <div class="hidden md:block absolute top-24 left-[18%] right-[18%] h-px
+                bg-gradient-to-r from-transparent via-[var(--accent-color)] to-transparent opacity-30">
+                </div>
+
+                <!-- Step 1 -->
+                <div class="relative group">
+                    <div class="bg-[var(--bg-card)] rounded-[2rem] border border-[var(--border-color)]
+                    overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500
+                    hover:-translate-y-3">
+
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="images/theatre (8).jpg" alt="Children learning acting"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent">
+                            </div>
+
+                            <div class="absolute bottom-5 left-6">
+                                <span class="text-white text-xs font-bold uppercase tracking-widest">
+                                    Step 01
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="p-8 text-center">
+                            <div class="w-16 h-16 mx-auto -mt-14 relative z-10 rounded-2xl
+                            bg-[var(--bg-card)] border border-[var(--border-color)]
+                            shadow-lg flex items-center justify-center
+                            text-[var(--accent-color)] text-2xl mb-6
+                            group-hover:-translate-y-2 transition-transform duration-300">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+
+                            <h3 class="text-2xl font-extrabold text-[var(--text-main)] mb-3">
+                                Discover
+                            </h3>
+
+                            <p class="text-[var(--text-muted)] text-sm leading-relaxed">
+                                Children explore acting, movement, storytelling, and
+                                imagination in a fun and welcoming environment.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="relative group">
+                    <div class="bg-[var(--bg-card)] rounded-[2rem] border border-[var(--border-color)]
+                    overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500
+                    hover:-translate-y-3">
+
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="images/theatre (9).jpg" alt="Children practicing theater"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent">
+                            </div>
+
+                            <div class="absolute bottom-5 left-6">
+                                <span class="text-white text-xs font-bold uppercase tracking-widest">
+                                    Step 02
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="p-8 text-center">
+                            <div class="w-16 h-16 mx-auto -mt-14 relative z-10 rounded-2xl
+                            bg-[var(--bg-card)] border border-[var(--border-color)]
+                            shadow-lg flex items-center justify-center
+                            text-[var(--accent-color)] text-2xl mb-6
+                            group-hover:-translate-y-2 transition-transform duration-300">
+                                <i class="fas fa-person-chalkboard"></i>
+                            </div>
+
+                            <h3 class="text-2xl font-extrabold text-[var(--text-main)] mb-3">
+                                Develop
+                            </h3>
+
+                            <p class="text-[var(--text-muted)] text-sm leading-relaxed">
+                                Through guided workshops and rehearsals, students develop
+                                performance skills, teamwork, voice, and confidence.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="relative group">
+                    <div class="bg-[var(--bg-card)] rounded-[2rem] border border-[var(--border-color)]
+                    overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500
+                    hover:-translate-y-3">
+
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="images/theatre (10).jpg" alt="Children performing on stage"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent">
+                            </div>
+
+                            <div class="absolute bottom-5 left-6">
+                                <span class="text-white text-xs font-bold uppercase tracking-widest">
+                                    Step 03
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="p-8 text-center">
+                            <div class="w-16 h-16 mx-auto -mt-14 relative z-10 rounded-2xl
+                            bg-[var(--bg-card)] border border-[var(--border-color)]
+                            shadow-lg flex items-center justify-center
+                            text-[var(--accent-color)] text-2xl mb-6
+                            group-hover:-translate-y-2 transition-transform duration-300">
+                                <i class="fas fa-masks-theater"></i>
+                            </div>
+
+                            <h3 class="text-2xl font-extrabold text-[var(--text-main)] mb-3">
+                                Shine
+                            </h3>
+
+                            <p class="text-[var(--text-muted)] text-sm leading-relaxed">
+                                Students bring everything together on stage and experience
+                                the excitement of performing in front of an audience.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom Highlight -->
+            <div class="mt-12 flex flex-wrap justify-center gap-4">
+                <span class="px-5 py-3 rounded-full bg-[var(--bg-card)] border border-[var(--border-color)]
+                text-sm font-semibold text-[var(--text-main)]">
+                    <i class="fas fa-heart text-[var(--accent-color)] mr-2"></i>
+                    Build Confidence
+                </span>
+
+                <span class="px-5 py-3 rounded-full bg-[var(--bg-card)] border border-[var(--border-color)]
+                text-sm font-semibold text-[var(--text-main)]">
+                    <i class="fas fa-users text-[var(--accent-color)] mr-2"></i>
+                    Make New Friends
+                </span>
+
+                <span class="px-5 py-3 rounded-full bg-[var(--bg-card)] border border-[var(--border-color)]
+                text-sm font-semibold text-[var(--text-main)]">
+                    <i class="fas fa-star text-[var(--accent-color)] mr-2"></i>
+                    Love The Stage
+                </span>
+            </div>
+
+        </div>
+    </section>
+    <!-- ================= EXTRA SECTION 3: CALL TO ACTION ================= -->
+    <section class="py-20 bg-[var(--bg-color)] px-6 lg:px-12 relative overflow-hidden">
+        <div
+            class="max-w-[1440px] mx-auto bg-gradient-to-br from-[var(--accent-color)] to-purple-700 rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden shadow-2xl">
+            <!-- decorative circles -->
+            <div
+                class="absolute top-0 right-0 w-64 h-64 bg-white opacity-10 rounded-full blur-2xl transform translate-x-1/2 -translate-y-1/2">
+            </div>
+            <div
+                class="absolute bottom-0 left-0 w-80 h-80 bg-black opacity-20 rounded-full blur-3xl transform -translate-x-1/3 translate-y-1/3">
+            </div>
+
+            <div class="relative z-10 max-w-3xl mx-auto text-white">
+                <span
+                    class="inline-block px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-xs font-bold uppercase tracking-widest mb-6">Registration
+                    Open</span>
+                <h2 class="text-4xl md:text-5xl font-black mb-6 leading-tight">Join Our Upcoming Season!</h2>
+                <p class="text-lg md:text-xl text-white/80 font-medium mb-10 max-w-2xl mx-auto">Spots fill up fast.
+                    Enroll your child today and let them discover the spotlight in a fun, supportive environment.</p>
+
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <a href="signup.html"
+                        class="btn bg-white !text-[var(--accent-dark)] hover:bg-gray-100 !py-4 !px-10 text-sm w-full sm:w-auto shadow-lg hover:-translate-y-1">
+                        Enroll Now
+                    </a>
+                    <a href="schedule.html"
+                        class="btn bg-transparent border-2 border-white text-white hover:bg-white/10 !py-4 !px-10 text-sm w-full sm:w-auto">
+                        View Schedule
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-10 pt-4">
+                <div class="lg:col-span-4">
+                    <div class="mb-6">
+                        <a href="index.html"
+                            class="inline-flex items-center gap-3 text-2xl font-bold tracking-widest uppercase"
+                            style="color: var(--text-main) !important; text-decoration: none;">
+                            <i class="fas fa-masks-theater text-indigo-500 text-3xl"
+                                style="color: var(--accent-color, #6366F1);"></i>
+                            Kids Theater
+                        </a>
+                    </div>
+                    <p class="opacity-80 leading-relaxed text-sm font-medium mb-8 max-w-sm"
+                        style="color: var(--text-muted);">
+                        Empowering children through the magic of theater. We turn creativity into confidence with
+                        engaging drama workshops and live stage performances.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="social-link-circle"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link-circle"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link-circle"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link-circle"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="lg:col-span-8">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+                        <div>
+                            <h4>Parent Portal</h4>
+                            <ul class="space-y-4">
+                                <li><a href="signup.html">Parent signup</a></li>
+                                <li><a href="user.html">My Dashboard</a></li>
+                                <li><a href="#">Class Schedules</a></li>
+                                <li><a href="schedule.html">Tuition & Fees</a></li>
+                                <li><a href="faq.html">Help Center</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>Our Programs</h4>
+                            <ul class="space-y-4">
+                                <li><a href="services.html">Beginner Acting</a></li>
+                                <li><a href="services.html">Musical Theater</a></li>
+                                <li><a href="services.html">Improv Workshops</a></li>
+                                <li><a href="services.html">Summer Camps</a></li>
+                                <li><a href="services.html">Stage Production</a></li>
+                            </ul>
+                        </div>
+                        <div class="sm:col-span-2 md:col-span-1">
+                            <h4>Studio Location</h4>
+                            <ul class="space-y-4 text-[var(--text-muted)] text-sm font-medium">
+                                <li class="flex items-start gap-4"><i class="fas fa-map-marker-alt mt-1 shrink-0"
+                                        style="color: var(--accent-color);"></i><span>123 Theater Lane<br>Creative Arts
+                                        District, CA 90210</span></li>
+                                <li class="flex items-center gap-4"><i class="fas fa-phone shrink-0"
+                                        style="color: var(--accent-color);"></i><a href="tel:+15550198"
+                                        class="break-all hover:text-[var(--accent-color)]">+1 (555) 800-PLAY</a></li>
+                                <li class="flex items-center gap-4"><i class="fas fa-envelope shrink-0"
+                                        style="color: var(--accent-color);"></i><a href="contact.html"
+                                        class="break-all hover:text-[var(--accent-color)]">hello@kidstheater.com</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="footer-bottom flex flex-col md:flex-row justify-between items-center text-xs gap-6 font-semibold uppercase tracking-widest">
+                <p style="color: var(--text-muted);">&copy; 2026 Kids Theater & Drama Workshop. All rights reserved.</p>
+                <div class="flex flex-wrap justify-center gap-6 sm:gap-8">
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Child Safety Guidelines</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= JAVASCRIPT ================= -->
+    <script>
+        // Floating Navbar logic
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('main-nav');
+            if (window.scrollY > 20) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu toggle logic
+        const mobileBtn = document.getElementById('mobile-btn');
+        const fullscreenMenu = document.getElementById('fullscreen-menu');
+        const closeMenu = document.getElementById('close-menu');
+        const drawerOverlay = document.getElementById('drawer-overlay');
+
+        function toggleMenu() {
+            fullscreenMenu.classList.toggle('active');
+            drawerOverlay.classList.toggle('active');
+            document.body.style.overflow = fullscreenMenu.classList.contains('active') ? 'hidden' : 'auto';
+        }
+
+        mobileBtn.onclick = toggleMenu;
+        closeMenu.onclick = toggleMenu;
+        drawerOverlay.onclick = toggleMenu;
+
+        // Theme logic
+        const themeDesktop = document.getElementById('theme-toggle-desktop');
+        const themeMobile = document.getElementById('theme-toggle-mobile');
+        const iconDesktop = document.getElementById('theme-icon-desktop');
+        const iconMobile = document.getElementById('theme-icon-mobile');
+        const theme = localStorage.getItem('theme') || 'light';
+
+        function updateThemeUI(isDark) {
+            if (isDark) {
+                document.body.classList.add('dark-mode');
+                if (iconDesktop) iconDesktop.className = 'fas fa-sun';
+                if (iconMobile) iconMobile.className = 'fas fa-sun';
+            } else {
+                document.body.classList.remove('dark-mode');
+                if (iconDesktop) iconDesktop.className = 'fas fa-moon';
+                if (iconMobile) iconMobile.className = 'fas fa-moon';
+            }
+        }
+
+        updateThemeUI(theme === 'dark');
+
+        function toggleTheme() {
+            const isDark = !document.body.classList.contains('dark-mode');
+            updateThemeUI(isDark);
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+
+        themeDesktop.onclick = toggleTheme;
+        if (themeMobile) themeMobile.onclick = toggleTheme;
+
+        // RTL/LTR logic
+        const rtlBtn = document.getElementById('rtl-btn');
+        const rtlMobile = document.getElementById('rtl-toggle-mobile');
+        const dir = localStorage.getItem('dir') || 'ltr';
+
+        function updateRTLUI(currentDir) {
+            const isRTL = currentDir === 'rtl';
+            if (rtlBtn) rtlBtn.innerText = isRTL ? 'RTL' : 'LTR';
+            if (rtlMobile) rtlMobile.innerText = isRTL ? 'RTL' : 'LTR';
+        }
+
+        if (dir === 'rtl') { document.documentElement.dir = 'rtl'; }
+        updateRTLUI(dir);
+
+        function toggleRTL() {
+            const isRTL = document.documentElement.dir === 'rtl';
+            const newDir = isRTL ? 'ltr' : 'rtl';
+            document.documentElement.dir = newDir;
+            localStorage.setItem('dir', newDir);
+            updateRTLUI(newDir);
+        }
+
+        if (rtlBtn) rtlBtn.onclick = toggleRTL;
+        if (rtlMobile) rtlMobile.onclick = toggleRTL;
+    </script>
+</body>
+
+</html>

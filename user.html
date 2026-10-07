@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Kids Theater · User Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none'%3E%3Cpath d='M16 2L20 12L30 12L22 18L25 28L16 22L7 28L10 18L2 12L12 12L16 2Z' fill='%236366F1'/%3E%3C/svg%3E">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: #0f0f0f;
+            color: #f1f5f9;
+        }
+
+        body.dark-mode .stat-card,
+        body.dark-mode .chart-card,
+        body.dark-mode .data-table,
+        body.dark-mode .settings-form,
+        body.dark-mode .product-card {
+            background: #1a1a1a;
+            border-color: #2d2d3a;
+        }
+
+        body.dark-mode .stat-value,
+        body.dark-mode .card-header h3,
+        body.dark-mode .page-title h1,
+        body.dark-mode .product-title,
+        body.dark-mode .form-group label {
+            color: #f1f5f9;
+        }
+
+        body.dark-mode .stat-label,
+        body.dark-mode .page-title p,
+        body.dark-mode .product-stock,
+        body.dark-mode .activity-time {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .stat-icon {
+            background: rgba(99, 102, 241, 0.2);
+        }
+
+        body.dark-mode th,
+        body.dark-mode td {
+            color: #e2e8f0;
+            border-bottom-color: #2d2d3a;
+        }
+
+        body.dark-mode .search-bar {
+            background: #2a2a35;
+            border-color: #3a3a4a;
+        }
+
+        body.dark-mode .search-bar input {
+            background: transparent;
+            color: #f1f5f9;
+        }
+
+        body.dark-mode .action-btn {
+            background: #2a2a35;
+            border-color: #3a3a4a;
+            color: #6366f1;
+        }
+
+        body.dark-mode .action-btn:hover {
+            background: #6366f1;
+            color: white;
+        }
+
+        body.dark-mode .status-completed {
+            background: #166534;
+            color: #86efac;
+        }
+
+        body.dark-mode .status-pending {
+            background: #854d0e;
+            color: #fde047;
+        }
+
+        body.dark-mode .status-processing {
+            background: #1e40af;
+            color: #93c5fd;
+        }
+
+        body.dark-mode .activity-icon {
+            background: rgba(99, 102, 241, 0.2);
+        }
+
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group select {
+            background: #2a2a35;
+            border-color: #3a3a4a;
+            color: #f1f5f9;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 315px;
+            background-color: #ffffff;
+            color: #1e293b;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow-y: auto;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            transform: translateX(0);
+            box-shadow: 2px 0 12px rgba(0, 0, 0, 0.05);
+            border-right: 1px solid #eef2ff;
+        }
+
+        body.dark-mode .sidebar {
+            background: linear-gradient(180deg, #1a1a1a 0%, #000000 100%);
+            color: #f1f5f9;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                z-index: 1001;
+            }
+
+            .sidebar.mobile-open {
+                transform: translateX(0);
+            }
+        }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+        }
+
+        body.sidebar-open {
+            overflow: hidden;
+        }
+
+        .sidebar-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #eef2ff;
+        }
+
+        body.dark-mode .sidebar-header {
+            border-bottom-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        /* 100% same logo styling from Template */
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: #6366f1;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .logo-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke-width: 1.5;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e293b;
+            text-decoration: none;
+            letter-spacing: -0.025em;
+        }
+
+        body.dark-mode .logo-text {
+            color: #ffffff;
+        }
+
+        .logo-text span {
+            color: #6366f1;
+        }
+
+        .nav-menu {
+            padding: 1.5rem 0;
+        }
+
+        .nav-item {
+            list-style: none;
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.75rem 1.5rem;
+            color: #475569;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 0 12px 12px 0;
+        }
+
+        body.rtl-active .nav-link {
+            border-radius: 12px 0 0 12px;
+        }
+
+        .nav-link:hover {
+            background: rgba(99, 102, 241, 0.08);
+            color: #6366f1;
+        }
+
+        .nav-link.active {
+            background: #6366f1;
+            color: white;
+        }
+
+        .nav-link i {
+            width: 24px;
+            font-size: 1.2rem;
+        }
+
+        .sidebar-action-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.75rem 1.5rem;
+            margin: 1rem 0 1.5rem 0;
+            color: #475569;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            cursor: pointer;
+            border-top: 1px solid #eef2ff;
+        }
+
+        body.dark-mode .sidebar-action-btn {
+            border-top-color: rgba(255, 255, 255, 0.05);
+            color: #cbd5e1;
+        }
+
+        .sidebar-action-btn:hover {
+            background: rgba(99, 102, 241, 0.08);
+            color: #6366f1;
+        }
+
+        body.dark-mode .sidebar-action-btn:hover {
+            color: #6366f1;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 315px;
+            padding: 1.5rem 2rem;
+            transition: margin-left 0.3s ease;
+            min-height: 100vh;
+            min-width: 0;
+            max-width: 100vw;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                margin-left: 0;
+                padding: 1rem;
+                padding-top: 70px;
+            }
+        }
+
+        /* RTL Support */
+        body.rtl-active {
+            direction: rtl;
+        }
+
+        body.rtl-active .sidebar {
+            left: auto;
+            right: 0;
+            border-right: none;
+            border-left: 1px solid #eef2ff;
+        }
+
+        body.dark-mode.rtl-active .sidebar {
+            border-left: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        body.rtl-active .main-content {
+            margin-left: 0;
+            margin-right: 315px;
+        }
+
+        @media (max-width: 768px) {
+            body.rtl-active .main-content {
+                margin-right: 0;
+            }
+
+            body.rtl-active .sidebar {
+                transform: translateX(100%);
+            }
+
+            body.rtl-active .sidebar.mobile-open {
+                transform: translateX(0);
+            }
+
+            body.rtl-active .menu-toggle {
+                left: auto;
+                right: 1rem;
+            }
+        }
+
+        /* Mobile Menu Toggle Button */
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 1100;
+            background: #6366f1;
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            transition: all 0.2s;
+        }
+
+        .menu-toggle:hover {
+            transform: scale(1.05);
+            background: #4f46e5;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+        /* Page Container */
+        .page-container {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .page-container.active-page {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Top Header */
+        .top-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .top-header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 1rem;
+            }
+        }
+
+        .page-title h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        body.dark-mode .page-title h1 {
+            color: #f1f5f9;
+        }
+
+        @media (max-width: 480px) {
+            .page-title h1 {
+                font-size: 1.5rem;
+            }
+        }
+
+        .page-title p {
+            color: #64748b;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .header-actions {
+                width: 100%;
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 0.5rem 1rem;
+            gap: 0.5rem;
+            flex: 1;
+            min-width: 180px;
+        }
+
+        @media (max-width: 768px) {
+            .search-bar {
+                width: 100%;
+            }
+
+            .search-bar input {
+                width: 100%;
+            }
+        }
+
+        .search-bar input {
+            border: none;
+            outline: none;
+            font-size: 0.9rem;
+            width: 200px;
+            background: transparent;
+        }
+
+        .toggle-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .toggle-buttons {
+                justify-content: center;
+            }
+        }
+
+        .icon-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 2px solid #6366f1;
+            background: transparent;
+            color: #6366f1;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .text-btn {
+            font-size: 14px;
+            font-weight: 600;
+            width: auto;
+            border-radius: 40px;
+            padding: 0 16px;
+        }
+
+        .icon-btn:hover {
+            background: #6366f1;
+            color: #fff;
+        }
+
+        body.dark-mode .icon-btn {
+            border-color: #a5b4fc;
+            color: #a5b4fc;
+        }
+
+        body.dark-mode .icon-btn:hover {
+            background: #a5b4fc;
+            color: #1a1a1a;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: #6366f1;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 1024px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.2rem;
+            transition: transform 0.2s;
+            border: 1px solid #eef2ff;
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .stat-icon i {
+            font-size: 1.4rem;
+            color: #6366f1;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .stat-label {
+            color: #64748b;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Charts Section */
+        .charts-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .charts-section {
+                grid-template-columns: 1.5fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .charts-section {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+        }
+
+        .chart-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            border: 1px solid #eef2ff;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .card-header h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        /* Progress Items */
+        .top-product-item {
+            margin-bottom: 1rem;
+            width: 100%;
+        }
+
+        .top-product-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.3rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .top-product-name {
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .top-product-sales {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #6366f1;
+        }
+
+        .progress-bar-container {
+            background: #e2e8f0;
+            border-radius: 10px;
+            height: 6px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            background: #6366f1;
+            height: 100%;
+            border-radius: 10px;
+        }
+
+        /* Tables */
+        .data-table {
+            background: white;
+            border-radius: 20px;
+            padding: 1.2rem;
+            border: 1px solid #eef2ff;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 500px;
+        }
+
+        @media (max-width: 640px) {
+            table {
+                min-width: 100%;
+            }
+
+            th,
+            td {
+                padding: 0.6rem;
+                font-size: 0.75rem;
+            }
+        }
+
+        th,
+        td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid #eef2ff;
+        }
+
+        th {
+            font-weight: 600;
+            color: #475569;
+            font-size: 0.8rem;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .status-completed {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-pending {
+            background: #fef9c3;
+            color: #854d0e;
+        }
+
+        .status-processing {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        /* Cards Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 640px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid #eef2ff;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            font-size: 1.1rem;
+        }
+
+        .product-price {
+            color: #6366f1;
+            font-weight: 600;
+        }
+
+        .product-stock {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-top: 0.5rem;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 640px) {
+            .quick-actions {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+        }
+
+        .action-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.8rem;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            font-weight: 600;
+            color: #6366f1;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .action-btn:hover {
+            background: #6366f1;
+            color: white;
+            border-color: #6366f1;
+        }
+
+        /* Activity Items */
+        .activity-item {
+            display: flex;
+            gap: 1rem;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        body.dark-mode .activity-item {
+            border-bottom-color: #2d2d3a;
+        }
+
+        .activity-icon {
+            width: 36px;
+            height: 36px;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .activity-icon i {
+            color: #6366f1;
+        }
+
+        .activity-content p {
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+
+        .activity-time {
+            font-size: 0.7rem;
+            color: #94a3b8;
+        }
+
+        /* Settings Form */
+        .settings-form {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            border: 1px solid #eef2ff;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.4rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.7rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            font-family: inherit;
+        }
+
+        .save-btn {
+            background: #6366f1;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        @media (max-width: 640px) {
+            .save-btn {
+                width: 100%;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #6366f1;
+            border-radius: 3px;
+        }
+
+        /* Mobile 360px fixes */
+        @media (max-width: 480px) {
+            .sidebar-header {
+                padding-top: 4.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="dashboard-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <a href="index.html"
+                        class="inline-flex items-center gap-3 text-2xl font-bold tracking-widest uppercase"
+                        style="color: var(--text-main) !important; text-decoration: none; display: inline-flex; align-items: center; gap: 12px; font-size: 1.5rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap;">
+                        <i class="fas fa-masks-theater text-indigo-500 text-3xl"
+                            style="color: var(--accent-color, #6366F1); font-size: 1.875rem;"></i>
+                        <span class="logo-text"
+                            style="font-size: 1.5rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;">Kids
+                            Theater</span>
+                    </a>
+                </div>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item" data-page="dashboard"><a class="nav-link active"><i
+                            class="fas fa-house"></i><span>Home</span></a></li>
+                <li class="nav-item" data-page="classes"><a class="nav-link"><i
+                            class="fas fa-masks-theater"></i><span>My
+                            Classes</span></a></li>
+                <li class="nav-item" data-page="history"><a class="nav-link"><i
+                            class="fas fa-file-invoice-dollar"></i><span>Payment
+                            History</span></a></li>
+                <li class="nav-item" data-page="merch"><a class="nav-link"><i
+                            class="fas fa-tshirt"></i><span>Merchandise
+                            & Extras</span></a></li>
+                <li class="nav-item" data-page="settings"><a class="nav-link"><i
+                            class="fas fa-user-cog"></i><span>Account
+                            Settings</span></a></li>
+            </ul>
+            <a href="signup.html" class="sidebar-action-btn" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </a>
+        </aside>
+
+        <main class="main-content" id="mainContent">
+            <div id="dashboard-page" class="page-container active-page"></div>
+            <div id="classes-page" class="page-container"></div>
+            <div id="history-page" class="page-container"></div>
+            <div id="merch-page" class="page-container"></div>
+            <div id="settings-page" class="page-container"></div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // ---------- DATA adapted for Kids Theater User Dashboard ----------
+        const paymentHistory = [
+            { id: '#INV-101', type: 'Full Year Registration', date: '2026-02-15', status: 'Completed', amount: '$450.00' },
+            { id: '#INV-102', type: 'Costume Fee', date: '2025-10-10', status: 'Completed', amount: '$45.00' },
+            { id: '#INV-103', type: 'Summer Camp Deposit', date: '2025-04-12', status: 'Completed', amount: '$50.00' }
+        ];
+
+        const upcomingClasses = [
+            { id: '#CLS-104', type: 'Improv Workshop', date: 'Tomorrow at 4:00 PM', status: 'Upcoming', tech: 'Inst: Emma R.' }
+        ];
+
+        const myEnrolledClasses = [
+            { id: 1, name: 'Musical Theater Advanced', serial: 'Fall Semester 2026', installDate: 'Mon & Wed, 4 PM', status: 'Enrolled', nextService: 'Showcase: Dec 15' }
+        ];
+
+        const studentSkills = [
+            { name: 'Attendance Rate', remaining: 95, percent: 95 },
+            { name: 'Vocal Projection', remaining: 80, percent: 80 },
+            { name: 'Stage Presence', remaining: 70, percent: 70 }
+        ];
+
+        const activitiesFeed = [
+            { icon: 'masks-theater', text: 'Improv Workshop confirmed for Tomorrow 4:00 PM', time: '2 hours ago' },
+            { icon: 'tshirt', text: 'Drama Club T-Shirt order shipped', time: '1 week ago' },
+            { icon: 'ticket-alt', text: 'Successfully enrolled in Musical Theater Advanced', time: '2 months ago' }
+        ];
+
+        // Toggle Functions
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('kidsTheater_darkMode', document.body.classList.contains('dark-mode'));
+            const darkIcon = document.getElementById('darkModeIconBtn');
+            if (darkIcon) darkIcon.innerHTML = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        }
+
+        function toggleRTL() {
+            document.body.classList.toggle('rtl-active');
+            localStorage.setItem('kidsTheater_rtl', document.body.classList.contains('rtl-active'));
+            const rtlBtn = document.getElementById('rtlIconBtn');
+            if (rtlBtn) rtlBtn.innerHTML = document.body.classList.contains('rtl-active') ? 'RTL' : 'LTR';
+        }
+
+        function closeSidebar() {
+            sidebar.classList.remove('mobile-open');
+            overlay.classList.remove('active');
+            document.body.classList.remove('sidebar-open');
+        }
+
+        function openSidebar() {
+            sidebar.classList.add('mobile-open');
+            overlay.classList.add('active');
+            document.body.classList.add('sidebar-open');
+        }
+
+        window.showPage = function (pageId) {
+            const pages = ['dashboard', 'classes', 'history', 'merch', 'settings'];
+            pages.forEach(p => document.getElementById(`${p}-page`).classList.remove('active-page'));
+            document.getElementById(`${pageId}-page`).classList.add('active-page');
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            document.querySelector(`[data-page="${pageId}"] .nav-link`).classList.add('active');
+            if (window.innerWidth <= 768) closeSidebar();
+        };
+
+        // Render Functions
+        function renderDashboard() {
+            const dashboardDiv = document.getElementById('dashboard-page');
+            dashboardDiv.innerHTML = `
+        <div class="top-header">
+          <div class="page-title"><h1>Welcome Back, Sarah!</h1><p>Here is your student portal summary</p></div>
+          <div class="header-actions">
+            <div class="toggle-buttons">
+              <button class="icon-btn" id="darkModeIconBtn">🌙</button>
+              <button class="icon-btn text-btn" id="rtlIconBtn">LTR</button>
+            </div>
+            <div class="user-profile"><div class="user-avatar">S</div></div>
+          </div>
+        </div>
+        
+        <div class="stats-grid">
+          <div class="stat-card"><div class="stat-icon"><i class="fas fa-masks-theater"></i></div><div class="stat-value">1</div><div class="stat-label">Enrolled Classes</div></div>
+          <div class="stat-card"><div class="stat-icon" style="background:rgba(22, 101, 52, 0.1);"><i class="fas fa-check-circle" style="color:#166534;"></i></div><div class="stat-value" style="font-size:1.4rem;">Cleared</div><div class="stat-label">Fee Status</div></div>
+          <div class="stat-card"><div class="stat-icon"><i class="fas fa-calendar-check"></i></div><div class="stat-value" style="font-size:1.4rem;">Dec 15</div><div class="stat-label">Next Showcase</div></div>
+          <div class="stat-card"><div class="stat-icon"><i class="fas fa-star"></i></div><div class="stat-value">3</div><div class="stat-label">New Notifications</div></div>
+        </div>
+        
+        <div class="quick-actions">
+          <button class="action-btn" onclick="alert('Enrollment form opened')"><i class="fas fa-calendar-plus"></i> Enroll in Class</button>
+          <button class="action-btn" onclick="showPage('merch')"><i class="fas fa-tshirt"></i> Buy Merchandise</button>
+          <button class="action-btn"><i class="fas fa-headset"></i> Contact Support</button>
+        </div>
+        
+        <div class="charts-section">
+          <!-- Skill Progress Card -->
+          <div class="chart-card">
+            <div class="card-header"><h3>Skill Progress & Attendance</h3><span style="color:#6366f1; font-size:0.8rem;">Musical Theater</span></div>
+            <div id="filterStatusList"></div>
+            <p style="font-size: 0.8rem; color: #64748b; margin-top: 1rem;"><i class="fas fa-info-circle"></i> Keep up the great work in class!</p>
+          </div>
+          
+          <!-- Upcoming Class Card -->
+          <div class="chart-card">
+            <div class="card-header"><h3>Upcoming Class</h3></div>
+            ${upcomingClasses.map(r => `
+              <div style="border: 1px solid #eef2ff; padding: 1rem; border-radius: 12px;">
+                <div style="display:flex; justify-content:space-between; margin-bottom: 0.5rem;">
+                  <strong>${r.type}</strong> <span class="status-badge status-processing">${r.status}</span>
+                </div>
+                <p style="font-size:0.85rem; color:#64748b; margin-bottom: 0.2rem;"><i class="fas fa-clock mr-1"></i> ${r.date}</p>
+                <p style="font-size:0.85rem; color:#64748b;"><i class="fas fa-chalkboard-teacher mr-1"></i> ${r.tech}</p>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+        
+        <div class="data-table">
+          <div class="card-header"><h3>Recent Payments</h3><a href="#" style="color:#6366f1; font-size:0.8rem;" onclick="showPage('history'); return false;">View All →</a></div>
+          <div id="recentOrdersTable"></div>
+        </div>
+      `;
+
+            document.getElementById('filterStatusList').innerHTML = studentSkills.map(p => `
+        <div class="top-product-item">
+          <div class="top-product-header">
+            <span class="top-product-name">${p.name}</span>
+            <span class="top-product-sales" style="color: ${p.percent < 50 ? '#dc2626' : '#6366f1'}">${p.remaining}%</span>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill" style="width: ${p.percent}%; background-color: ${p.percent < 50 ? '#dc2626' : '#6366f1'};"></div>
+          </div>
+        </div>
+      `).join('');
+
+            document.getElementById('recentOrdersTable').innerHTML = `<table><thead><tr><th>Invoice ID</th><th>Detail</th><th>Date</th><th>Status</th></tr></thead><tbody>${paymentHistory.slice(0, 3).map(o => `<tr><td>${o.id}</td><td>${o.type}</td><td>${o.date}</td><td><span class="status-badge status-completed">${o.status}</span></td></tr>`).join('')}</tbody></table>`;
+
+            // Re-attach toggles
+            document.getElementById('darkModeIconBtn')?.addEventListener('click', toggleDarkMode);
+            document.getElementById('rtlIconBtn')?.addEventListener('click', toggleRTL);
+        }
+
+        function renderClasses() {
+            document.getElementById('classes-page').innerHTML = `
+        <div class="top-header"><div class="page-title"><h1>My Classes</h1><p>Programs your child is currently enrolled in</p></div><div class="header-actions"><button class="action-btn" style="width:auto;"><i class="fas fa-plus"></i> Find New Classes</button></div></div>
+        <div class="products-grid" id="devicesGrid"></div>
+      `;
+
+            document.getElementById('devicesGrid').innerHTML = myEnrolledClasses.map(d => `
+        <div class="product-card">
+          <div class="product-info">
+            <div class="product-title">${d.name}</div>
+            <div class="product-stock" style="margin-bottom: 1rem;">Term: ${d.serial}</div>
+            <div style="font-size:0.85rem; margin-bottom: 0.4rem;"><strong>Schedule:</strong> ${d.installDate}</div>
+            <div style="font-size:0.85rem; margin-bottom: 1rem;"><strong>Upcoming:</strong> <span style="color:#6366f1">${d.nextService}</span></div>
+            <span class="status-badge status-completed">${d.status}</span>
+          </div>
+        </div>
+      `).join('');
+        }
+
+        function renderHistory() {
+            document.getElementById('history-page').innerHTML = `
+        <div class="top-header"><div class="page-title"><h1>Payment History</h1><p>Past tuition and registration invoices</p></div></div>
+        <div class="data-table"><table><thead><tr><th>Invoice ID</th><th>Description</th><th>Date</th><th>Amount</th><th>Status</th><th>Receipt</th></tr></thead><tbody>${paymentHistory.map(s => `<tr><td>${s.id}</td><td>${s.type}</td><td>${s.date}</td><td>${s.amount}</td><td><span class="status-badge status-completed">${s.status}</span></td><td><button style="background:transparent; border:none; color:#6366f1; cursor:pointer;" title="Download PDF"><i class="fas fa-download"></i></button></td></tr>`).join('')}</tbody></table></div>
+      `;
+        }
+
+        function renderMerch() {
+            document.getElementById('merch-page').innerHTML = `
+        <div class="top-header"><div class="page-title"><h1>Merchandise & Extras</h1><p>Get your official Drama Club gear</p></div></div>
+        <div class="chart-card" style="max-width: 600px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px solid #eef2ff; padding-bottom: 1rem; margin-bottom: 1rem;">
+            <div>
+              <h2 style="font-size: 1.4rem; font-weight: 700;">Drama Club Jacket</h2>
+              <p style="color:#166534; font-weight:600; font-size:0.9rem; margin-top:0.3rem;"><i class="fas fa-truck"></i> In Stock</p>
+            </div>
+            <div style="text-align:right;">
+              <span style="font-size:2rem; font-weight:700; color:#6366f1;">$45</span><span style="font-size:0.8rem; color:#64748b;">/each</span>
+            </div>
+          </div>
+          <div style="margin-bottom: 1.5rem;">
+            <p style="font-size:0.9rem; margin-bottom: 0.5rem;"><strong>Available Sizes:</strong> Youth S, M, L, Adult S, M</p>
+            <p style="font-size:0.9rem; margin-bottom: 0.5rem;"><strong>Customization:</strong> Free Name Embroidery</p>
+          </div>
+          <h4 style="font-size:0.95rem; margin-bottom: 0.8rem;">Jacket Features:</h4>
+          <ul style="list-style:none; padding:0; font-size:0.9rem; color:#475569; display:flex; flex-direction:column; gap:0.5rem; margin-bottom: 1.5rem;">
+            <li><i class="fas fa-check" style="color:#6366f1; width:20px;"></i> Premium cotton blend</li>
+            <li><i class="fas fa-check" style="color:#6366f1; width:20px;"></i> Official Theater logo printed on back</li>
+            <li><i class="fas fa-check" style="color:#6366f1; width:20px;"></i> Perfect for cast warmups</li>
+            <li><i class="fas fa-check" style="color:#6366f1; width:20px;"></i> Pre-shrunk material</li>
+          </ul>
+          <button class="action-btn" style="width:100%;">Order Now</button>
+        </div>
+      `;
+        }
+
+        function renderSettings() {
+            document.getElementById('settings-page').innerHTML = `
+        <div class="top-header"><div class="page-title"><h1>Account Settings</h1><p>Update your parent and student details</p></div></div>
+        <div class="settings-form" style="max-width: 600px;">
+          <h3 style="margin-bottom:1rem;">Parent Information</h3>
+          <div class="form-group"><label>Parent Full Name</label><input type="text" value="Sarah Johnson"></div>
+          <div class="form-group"><label>Email Address</label><input type="email" value="sarah@example.com"></div>
+          <div class="form-group"><label>Emergency Phone Number</label><input type="text" value="+1 (555) 123-4567"></div>
+          <div class="form-group"><label>Billing Address</label><input type="text" value="123 Main St, Apt 4B, New York, NY 10001"></div>
+          <button class="save-btn" onclick="alert('Profile updated successfully!')" style="margin-top: 1rem;">Save Changes</button>
+        </div>
+      `;
+        }
+
+        // Navigation
+        document.querySelectorAll('.nav-item').forEach(item => item.addEventListener('click', () => showPage(item.getAttribute('data-page'))));
+
+        // Mobile sidebar controls
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        menuToggle?.addEventListener('click', () => sidebar.classList.contains('mobile-open') ? closeSidebar() : openSidebar());
+        overlay?.addEventListener('click', closeSidebar);
+
+        // Load saved preferences
+        if (localStorage.getItem('kidsTheater_darkMode') === 'true') document.body.classList.add('dark-mode');
+        if (localStorage.getItem('kidsTheater_rtl') === 'true') document.body.classList.add('rtl-active');
+
+        // Initialize all pages
+        renderDashboard();
+        renderClasses();
+        renderHistory();
+        renderMerch();
+        renderSettings();
+
+        // Fallback toggles hook
+        setTimeout(() => {
+            document.getElementById('darkModeIconBtn')?.addEventListener('click', toggleDarkMode);
+            document.getElementById('rtlIconBtn')?.addEventListener('click', toggleRTL);
+        }, 100);
+    </script>
+</body>
+
+</html>

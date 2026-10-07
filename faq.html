@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Kids Theater & Drama Workshop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none'%3E%3Cpath d='M16 2L20 12L30 12L22 18L25 28L16 22L7 28L10 18L2 12L12 12L16 2Z' fill='%236366F1'/%3E%3C/svg%3E">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontWeight: {
+                        semibold: '500',
+                        bold: '600',
+                        extrabold: '800',
+                        black: '900'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* === RESET & CORE === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            transition: background-color 0.3s, color 0.3s;
+            overflow-x: hidden;
+        }
+
+        /* === THEME VARIABLES === */
+        :root {
+            --bg-color: #FAFAFA;
+            --bg-secondary: #F3F4F6;
+            --bg-card: #FFFFFF;
+            --text-main: #111827;
+            --text-muted: #6B7280;
+            --accent-color: #6366F1;
+            --accent-dark: #4F46E5;
+            --border-color: #E5E7EB;
+            --nav-bg: rgba(255, 255, 255, 0.85);
+            --drawer-bg: rgba(255, 255, 255, 0.98);
+            --menu-hover-bg: #EEF2FF;
+        }
+
+        body.dark-mode {
+            --bg-color: #111827;
+            --bg-secondary: #1F2937;
+            --bg-card: #1F2937;
+            --text-main: #F9FAFB;
+            --text-muted: #9CA3AF;
+            --accent-color: #818CF8;
+            --accent-dark: #6366F1;
+            --border-color: #374151;
+            --nav-bg: rgba(17, 24, 39, 0.85);
+            --drawer-bg: rgba(17, 24, 39, 0.98);
+            --menu-hover-bg: rgba(99, 102, 241, 0.1);
+        }
+
+        [dir="rtl"] {
+            text-align: right;
+        }
+
+        [dir="rtl"] .ml-auto {
+            margin-right: auto;
+            margin-left: 0;
+        }
+
+        [dir="rtl"] .mr-auto {
+            margin-left: auto;
+            margin-right: 0;
+        }
+
+        @keyframes blob {
+            0% {
+                transform: translate(0px, 0px) scale(1);
+            }
+
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+
+            100% {
+                transform: translate(0px, 0px) scale(1);
+            }
+        }
+
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* === NAVBAR DESIGN === */
+        .navbar {
+            position: fixed;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 95%;
+            max-width: 1440px;
+            z-index: 1000;
+            background: var(--nav-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(99, 102, 241, 0.15);
+            border-radius: 9999px;
+            padding: 0 32px;
+            height: 75px;
+            display: flex;
+            align-items: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 40px -10px rgba(99, 102, 241, 0.1);
+        }
+
+        body.dark-mode .navbar {
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .navbar.scrolled {
+            top: 12px;
+            width: 95%;
+            border-radius: 9999px;
+            height: 70px;
+            border: 1px solid var(--border-color);
+            background: var(--nav-bg);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.15);
+        }
+
+        body.dark-mode .navbar.scrolled {
+            background: rgba(17, 24, 39, 0.95);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link {
+            padding: 8px 4px;
+            margin: 0 14px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--accent-color);
+        }
+
+        /* Dropdowns */
+        .dropdown {
+            position: relative;
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 65px;
+            left: 0;
+            transform: translateY(15px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 100;
+        }
+
+        .navbar.scrolled .dropdown-menu {
+            top: 55px;
+        }
+
+        .dropdown-inner {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            min-width: 240px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        body.dark-mode .dropdown-inner {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 12px 16px;
+            border-radius: 8px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.2s;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        .dropdown-item:hover {
+            background: var(--menu-hover-bg);
+            color: var(--accent-color);
+            transform: translateX(4px);
+        }
+
+        [dir="rtl"] .dropdown-item:hover {
+            transform: translateX(-4px);
+        }
+
+        /* === BUTTONS === */
+        .icon-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-weight: 800;
+        }
+
+        .icon-btn:hover {
+            background: var(--accent-color);
+            color: #fff;
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(99, 102, 241, 0.2);
+        }
+
+        .btn {
+            padding: 12px 28px;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 9999px;
+            border: none;
+        }
+
+        .btn-solid {
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-dark));
+            color: #FFFFFF !important;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-solid:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-outline {
+            background: var(--bg-secondary);
+            color: var(--accent-color) !important;
+        }
+
+        .btn-outline:hover {
+            background: var(--accent-color);
+            color: #FFFFFF !important;
+            transform: translateY(-2px);
+        }
+
+        /* MOBILE MENU */
+        .drawer-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(4px);
+        }
+
+        .drawer-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .fullscreen-menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            max-width: 400px;
+            height: 100dvh;
+            background: var(--drawer-bg);
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(100%);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border-left: 1px solid var(--border-color);
+        }
+
+        [dir="rtl"] .fullscreen-menu {
+            right: auto;
+            left: 0;
+            transform: translateX(-100%);
+            border-left: none;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .fullscreen-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        .mobile-link {
+            display: block;
+            width: 100%;
+            padding: 16px 32px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-main);
+            text-decoration: none;
+            transition: all 0.3s;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .mobile-link:hover {
+            color: var(--accent-color);
+            padding-left: 40px;
+            background: var(--menu-hover-bg);
+        }
+
+        [dir="rtl"] .mobile-link:hover {
+            padding-left: 32px;
+            padding-right: 40px;
+        }
+
+        /* === ACCORDION SPECIFIC CSS === */
+        .faq-icon {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding-top: 80px;
+        }
+
+        body.dark-mode footer {
+            border-color: var(--border-color);
+        }
+
+        footer h4 {
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        footer a,
+        footer li,
+        footer span {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            font-weight: 400;
+        }
+
+        footer a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-link-circle {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            color: var(--text-main);
+            background: transparent;
+        }
+
+        .social-link-circle:hover {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+            color: #FFFFFF;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            padding: 32px 0;
+            margin-top: 60px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar" id="main-nav">
+        <div class="w-full flex items-center justify-between mx-auto">
+            <div class="flex items-center flex-shrink-0">
+                <a href="index.html" class="inline-flex items-center gap-3 text-2xl font-bold tracking-widest uppercase"
+                    style="color: var(--text-main) !important; text-decoration: none;">
+                    <i class="fas fa-masks-theater text-indigo-500 text-3xl"
+                        style="color: var(--accent-color, #6366F1);"></i>
+                    Kids Theater
+                </a>
+            </div>
+
+            <div class="hidden xl:flex justify-center items-center flex-1">
+                <div class="dropdown">
+                    <div class="nav-link">Home <i class="fas fa-chevron-down text-[9px] ml-1 opacity-50"></i></div>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-inner">
+                            <a href="index.html" class="dropdown-item">Home Page 1</a>
+                            <a href="home-2.html" class="dropdown-item">Home Page 2</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="services.html" class="nav-link">Services</a>
+                <a href="schedule.html" class="nav-link">Schedule</a>
+                <a href="booking.html" class="nav-link">Booking</a>
+                <a href="faq.html" class="nav-link active">FAQ</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <div class="dropdown">
+                    <div class="nav-link">Dashboard <i class="fas fa-chevron-down text-[9px] ml-1 opacity-50"></i></div>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-inner">
+                            <a href="user.html" class="dropdown-item">User Dashboard</a>
+                            <a href="admin.html" class="dropdown-item">Admin Dashboard</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hidden xl:flex items-center gap-3">
+                <button id="theme-toggle-desktop" class="icon-btn" title="Toggle Dark Mode">
+                    <i class="fas fa-moon" id="theme-icon-desktop"></i>
+                </button>
+                <button id="rtl-btn" class="icon-btn" title="Toggle LTR/RTL">
+                    LTR
+                </button>
+                <div class="w-px h-6 bg-[var(--border-color)] mx-2"></div>
+                <a href="login.html" class="btn btn-solid !w-[100px] !h-[40px] !p-0 !text-[11px]">Login</a>
+            </div>
+
+            <div class="xl:hidden flex items-center justify-end gap-4">
+                <button id="mobile-btn"
+                    class="text-2xl text-[var(--text-main)] transition-colors hover:text-[var(--accent-color)]">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ================= HAMBURGER / MOBILE MENU ================= -->
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <div class="fullscreen-menu" id="fullscreen-menu">
+        <div class="w-full px-8 py-6 flex justify-between items-center shrink-0 border-b border-[var(--border-color)]">
+            <a href="index.html" class="text-xl font-bold tracking-widest uppercase block flex items-center gap-2"
+                style="color: var(--text-main) !important; text-decoration: none;">
+                <i class="fas fa-masks-theater text-indigo-500" style="color: var(--accent-color, #6366F1);"></i> Kids
+                Theater
+            </a>
+            <button id="close-menu"
+                class="w-10 h-10 rounded-full flex items-center justify-center transition-all text-xl text-[var(--text-main)] hover:bg-[var(--bg-secondary)] hover:text-[var(--accent-color)]">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="flex flex-col w-full overflow-y-auto flex-1 py-4">
+            <a href="index.html" class="mobile-link">Home Page 1</a>
+            <a href="home-2.html" class="mobile-link">Home Page 2</a>
+            <a href="about.html" class="mobile-link">About</a>
+            <a href="services.html" class="mobile-link">Services</a>
+            <a href="schedule.html" class="mobile-link">Schedule</a>
+            <a href="booking.html" class="mobile-link">Booking</a>
+            <a href="faq.html" class="mobile-link" style="color: var(--accent-color);">FAQ</a>
+            <a href="contact.html" class="mobile-link">Contact</a>
+        </div>
+        <div
+            class="w-full px-8 py-8 border-t border-[var(--border-color)] flex flex-col gap-6 shrink-0 bg-[var(--bg-secondary)]">
+            <div class="flex gap-4 w-full">
+                <a href="login.html" class="btn btn-outline flex-1 !py-3">Login</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= HERO BANNER ================= -->
+    <section
+        class="relative w-full min-h-[100dvh] pt-24 md:pt-32 pb-12 md:pb-16 flex items-center overflow-hidden bg-[var(--bg-color)] border-b border-[var(--border-color)]">
+        <!-- Decorative Background Elements -->
+        <div
+            class="absolute top-20 left-10 w-64 h-64 bg-indigo-300/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob">
+        </div>
+        <div
+            class="absolute top-40 right-10 w-64 h-64 bg-purple-300/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000">
+        </div>
+        <div
+            class="absolute -bottom-8 left-40 w-64 h-64 bg-pink-300/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000">
+        </div>
+
+        <div class="max-w-[1440px] mx-auto px-6 lg:px-12 w-full relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+                <!-- Text Content -->
+                <div class="flex flex-col items-start text-left max-w-2xl">
+                    <span
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--bg-card)] border border-[var(--border-color)] shadow-sm text-[var(--accent-color)] text-xs font-bold uppercase tracking-widest mb-6">
+                        <span class="relative flex h-2 w-2">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+                        </span>
+                        Help Center
+                    </span>
+
+                    <h1
+                        class="text-5xl md:text-6xl lg:text-[4.5rem] font-black leading-[1.1] mb-6 text-[var(--text-main)] tracking-tight">
+                        Frequently Asked <br>
+                        <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-[var(--accent-color)] to-purple-600">Questions</span>
+                    </h1>
+
+                    <p class="text-[var(--text-muted)] text-lg md:text-xl leading-relaxed font-medium mb-8 max-w-lg">
+                        Find answers to common questions about our theater programs, enrollment process, class
+                        schedules, and what to expect when your child joins our creative community.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-10">
+                        <a href="#faq-section"
+                            class="btn btn-solid !py-4 !px-8 text-sm flex items-center justify-center gap-2 group">
+                            <i class="fas fa-search"></i> Browse FAQs
+                        </a>
+                        <a href="contact.html"
+                            class="btn btn-outline !bg-[var(--bg-card)] !text-[var(--text-main)] hover:!border-[var(--accent-color)] hover:!text-[var(--accent-color)] !py-4 !px-8 text-sm flex items-center justify-center gap-2 shadow-sm">
+                            <i class="fas fa-envelope"></i> Contact Support
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Responsive Image Composition -->
+                <div class="relative w-full h-auto lg:h-[650px] flex items-center justify-center mt-10 lg:mt-0">
+                    <div
+                        class="relative w-full lg:w-[90%] h-[350px] sm:h-[450px] lg:h-[85%] rounded-[40px] overflow-hidden shadow-2xl border-4 border-[var(--bg-card)] z-20 transform lg:hover:-translate-y-2 transition-transform duration-500">
+                        <img src="images/theatre (3).jpg" alt="Children engaged in a creative learning workshop"
+                            class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= EXTRA SECTION 1: WHY CHOOSE US ================= -->
+    <section class="py-20 lg:py-28 bg-[var(--bg-secondary)] border-b border-[var(--border-color)]">
+        <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-[var(--text-main)] mb-4">More Than Just Acting</h2>
+                <p class="text-[var(--text-muted)] text-lg leading-relaxed">Theater builds skills that last a lifetime.
+                    Here’s what your child will gain through our programs.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div
+                    class="bg-[var(--bg-card)] p-8 rounded-3xl border border-[var(--border-color)] hover:-translate-y-2 transition-transform duration-300 shadow-sm">
+                    <div
+                        class="w-14 h-14 bg-indigo-100 dark:bg-indigo-900/30 rounded-2xl flex items-center justify-center mb-6 text-[var(--accent-color)] text-2xl">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-[var(--text-main)] mb-3">Confidence Building</h3>
+                    <p class="text-[var(--text-muted)] leading-relaxed">We help shy children find their voice and
+                        outgoing children channel their energy into powerful performances.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div
+                    class="bg-[var(--bg-card)] p-8 rounded-3xl border border-[var(--border-color)] hover:-translate-y-2 transition-transform duration-300 shadow-sm">
+                    <div
+                        class="w-14 h-14 bg-pink-100 dark:bg-pink-900/30 rounded-2xl flex items-center justify-center mb-6 text-pink-500 text-2xl">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-[var(--text-main)] mb-3">Teamwork & Empathy</h3>
+                    <p class="text-[var(--text-muted)] leading-relaxed">Putting on a show requires everyone to work
+                        together. Students learn to support each other and understand diverse perspectives.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div
+                    class="bg-[var(--bg-card)] p-8 rounded-3xl border border-[var(--border-color)] hover:-translate-y-2 transition-transform duration-300 shadow-sm">
+                    <div
+                        class="w-14 h-14 bg-purple-100 dark:bg-purple-900/30 rounded-2xl flex items-center justify-center mb-6 text-purple-500 text-2xl">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-[var(--text-main)] mb-3">Creative Expression</h3>
+                    <p class="text-[var(--text-muted)] leading-relaxed">From improv games to scriptwriting, we provide a
+                        safe space where imagination has absolutely no limits.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FAQ SECTION (ACCORDIONS) ================= -->
+    <section id="faq-section" class="py-20 lg:py-28 bg-[var(--bg-color)] border-b border-[var(--border-color)]">
+        <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+
+            <div class="grid lg:grid-cols-2 gap-16 lg:gap-12">
+
+                <!-- FAQ BLOCK 1: GENERAL QUESTIONS -->
+                <div>
+                    <h2 class="text-3xl font-extrabold text-[var(--text-main)] mb-8 flex items-center gap-3">
+                        <i class="fas fa-info-circle text-[var(--accent-color)]"></i> General Questions
+                    </h2>
+
+                    <div class="flex flex-col border-t border-[var(--border-color)]">
+                        <!-- Q1 -->
+                        <div class="border-b border-[var(--border-color)] faq-item">
+                            <button
+                                class="faq-question w-full flex justify-between items-center py-5 text-left font-bold text-[var(--text-main)] hover:text-[var(--accent-color)] transition-colors text-lg">
+                                <span>What age groups do you cater to?</span>
+                                <i class="fas fa-chevron-down faq-icon text-[var(--text-muted)] text-sm ml-4"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p class="pb-5 text-[var(--text-muted)] text-base leading-relaxed">
+                                    We offer specialized workshops for children and teens aged 4 through 17. Our classes
+                                    are divided into specific age groups (4-6, 7-10, 11-13, and 14-17) to ensure
+                                    age-appropriate learning and socialization.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Q2 -->
+                        <div class="border-b border-[var(--border-color)] faq-item">
+                            <button
+                                class="faq-question w-full flex justify-between items-center py-5 text-left font-bold text-[var(--text-main)] hover:text-[var(--accent-color)] transition-colors text-lg">
+                                <span>Does my child need prior acting experience?</span>
+                                <i class="fas fa-chevron-down faq-icon text-[var(--text-muted)] text-sm ml-4"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p class="pb-5 text-[var(--text-muted)] text-base leading-relaxed">
+                                    Not at all! We welcome students of all experience levels. Our beginner classes focus
+                                    on the fundamentals in a no-pressure environment, while our advanced masterclasses
+                                    offer challenges for experienced young actors.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Q3 -->
+                        <div class="border-b border-[var(--border-color)] faq-item">
+                            <button
+                                class="faq-question w-full flex justify-between items-center py-5 text-left font-bold text-[var(--text-main)] hover:text-[var(--accent-color)] transition-colors text-lg">
+                                <span>What should my child wear to the workshops?</span>
+                                <i class="fas fa-chevron-down faq-icon text-[var(--text-muted)] text-sm ml-4"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p class="pb-5 text-[var(--text-muted)] text-base leading-relaxed">
+                                    Students should wear comfortable, non-restrictive clothing that allows them to move
+                                    freely (like sweatpants, leggings, and t-shirts). Closed-toe soft shoes or sneakers
+                                    are mandatory for safety on stage.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Q4 -->
+                        <div class="border-b border-[var(--border-color)] faq-item">
+                            <button
+                                class="faq-question w-full flex justify-between items-center py-5 text-left font-bold text-[var(--text-main)] hover:text-[var(--accent-color)] transition-colors text-lg">
+                                <span>How long do the workshops usually last?</span>
+                                <i class="fas fa-chevron-down faq-icon text-[var(--text-muted)] text-sm ml-4"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p class="pb-5 text-[var(--text-muted)] text-base leading-relaxed">
+                                    Most of our standard weekend workshops last for 2 hours per session. Our summer
+                                    camps run half-day (4 hours) or full-day (7 hours). Rehearsals for mainstage
+                                    productions may require longer commitments.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Q5 -->
+                        <div class="border-b border-[var(--border-color)] faq-item">
+                            <button
+                                class="faq-question w-full flex justify-between items-center py-5 text-left font-bold text-[var(--text-main)] hover:text-[var(--accent-color)] transition-colors text-lg">
+                                <span>Can parents stay and watch the classes?</span>
+                                <i class="fas fa-chevron-down faq-icon text-[var(--text-muted)] text-sm ml-4"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p class="pb-5 text-[var(--text-muted)] text-base leading-relaxed">
+                                    To minimize distractions and allow children to fully express themselves without
+                                    feeling self-conscious, our classes are closed to parents. However, we do host an
+                                    "Open Studio Day" at the end of every term where parents are invited!
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Q6 -->
+                        <div class="border-b border-[var(--border-color)] faq-item">
+                            <button
+                                class="faq-question w-full flex justify-between items-center py-5 text-left font-bold text-[var(--text-main)] hover:text-[var(--accent-color)] transition-colors text-lg">
+                                <span>What is the student-to-teacher ratio?</span>
+                                <i class="fas fa-chevron-down faq-icon text-[var(--text-muted)] text-sm ml-4"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p class="pb-5 text-[var(--text-muted)] text-base leading-relaxed">
+                                    We maintain a strict ratio of 12:1 for older children and 8:1 for ages 4-6. Every
+                                    class is led by a lead instructor and supported by an assistant teaching artist,
+                                    ensuring every child gets individualized attention.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ BLOCK 2: ENROLLMENT & POLICIES -->
+                <div>
+                    <h2 class="text-3xl font-extrabold text-[var(--text-main)] mb-8 flex items-center gap-3">
+                        <i class="fas fa-file-contract text-[var(--accent-color)]"></i> Enrollment & Policies
+                    </h2>
+
+                    <div class="flex flex-col border-t border-[var(--border-color)]">
+                        <!-- Q1 -->
+                        <div class="border-b border-[var(--border-color)] faq-item">
+                            <button
+                                class="faq-question w-full flex justify-between items-center py-5 text-left font-bold text-[var(--text-main)] hover:text-[var(--accent-color)] transition-colors text-lg">
+                                <span>How do I signup my child?</span>
+                                <i class="fas fa-chevron-down faq-icon text-[var(--text-muted)] text-sm ml-4"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p class="pb-5 text-[var(--text-muted)] text-base leading-relaxed">
+                                    Registration can be completed entirely online via our Booking portal. You will need
+                                    to create a Parent Portal account, select the desired class, and submit the online
+                                    registration form along with the initial deposit.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Q2 -->
+                        <div class="border-b border-[var(--border-color)] faq-item">
+                            <button
+                                class="faq-question w-full flex justify-between items-center py-5 text-left font-bold text-[var(--text-main)] hover:text-[var(--accent-color)] transition-colors text-lg">
+                                <span>What is your cancellation and refund policy?</span>
+                                <i class="fas fa-chevron-down faq-icon text-[var(--text-muted)] text-sm ml-4"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p class="pb-5 text-[var(--text-muted)] text-base leading-relaxed">
+                                    You may cancel up to 14 days before the start of a term for a full refund (minus a
+                                    $25 processing fee). Cancellations within 14 days are eligible for studio credit
+                                    only. Once classes begin, no refunds are issued.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Q3 -->
+                        <div class="border-b border-[var(--border-color)] faq-item">
+                            <button
+                                class="faq-question w-full flex justify-between items-center py-5 text-left font-bold text-[var(--text-main)] hover:text-[var(--accent-color)] transition-colors text-lg">
+                                <span>Are there any hidden fees or extra costume costs?</span>
+                                <i class="fas fa-chevron-down faq-icon text-[var(--text-muted)] text-sm ml-4"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p class="pb-5 text-[var(--text-muted)] text-base leading-relaxed">
+                                    No hidden fees! Tuition covers all class materials. For end-of-term performances,
+                                    costumes are provided by our wardrobe department. We may occasionally ask parents to
+                                    provide basic items like black leggings or plain t-shirts.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Q4 -->
+                        <div class="border-b border-[var(--border-color)] faq-item">
+                            <button
+                                class="faq-question w-full flex justify-between items-center py-5 text-left font-bold text-[var(--text-main)] hover:text-[var(--accent-color)] transition-colors text-lg">
+                                <span>Do you offer sibling or early bird discounts?</span>
+                                <i class="fas fa-chevron-down faq-icon text-[var(--text-muted)] text-sm ml-4"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p class="pb-5 text-[var(--text-muted)] text-base leading-relaxed">
+                                    Yes! We offer a 10% discount on tuition for a second child, and 15% for a third. We
+                                    also run an Early Bird registration period one month before the new term begins,
+                                    which automatically applies a 5% discount at checkout.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Q5 -->
+                        <div class="border-b border-[var(--border-color)] faq-item">
+                            <button
+                                class="faq-question w-full flex justify-between items-center py-5 text-left font-bold text-[var(--text-main)] hover:text-[var(--accent-color)] transition-colors text-lg">
+                                <span>What happens if my child misses a class?</span>
+                                <i class="fas fa-chevron-down faq-icon text-[var(--text-muted)] text-sm ml-4"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p class="pb-5 text-[var(--text-muted)] text-base leading-relaxed">
+                                    If your child is sick or unable to attend, please notify us via the Parent Portal.
+                                    We offer two "make-up" sessions per term by allowing students to drop in on an
+                                    equivalent class on a different day, subject to space availability.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Q6 -->
+                        <div class="border-b border-[var(--border-color)] faq-item">
+                            <button
+                                class="faq-question w-full flex justify-between items-center py-5 text-left font-bold text-[var(--text-main)] hover:text-[var(--accent-color)] transition-colors text-lg">
+                                <span>Are there performance opportunities at the end?</span>
+                                <i class="fas fa-chevron-down faq-icon text-[var(--text-muted)] text-sm ml-4"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p class="pb-5 text-[var(--text-muted)] text-base leading-relaxed">
+                                    Absolutely. All of our 12-week courses culminate in a final showcase for family and
+                                    friends. Additionally, our "Production Class" casts students in full-length plays
+                                    and musicals that run for a weekend in our main theater.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= EXTRA SECTION 2: TESTIMONIALS ================= -->
+    <section class="py-20 lg:py-28 bg-[var(--bg-card)] border-b border-[var(--border-color)] overflow-hidden relative">
+        <div class="max-w-[1440px] mx-auto px-6 lg:px-12 relative z-10">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-[var(--text-main)] mb-4">What Parents Say</h2>
+                <p class="text-[var(--text-muted)] text-lg leading-relaxed">Don't just take our word for it. Hear from
+                    the families who have experienced the magic firsthand.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="bg-[var(--bg-secondary)] p-8 rounded-3xl border border-[var(--border-color)] relative">
+                    <i
+                        class="fas fa-quote-left absolute top-6 right-8 text-4xl text-[var(--border-color)] opacity-50"></i>
+                    <div class="flex text-yellow-400 text-sm mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-[var(--text-main)] font-medium leading-relaxed mb-6">"My daughter used to be
+                        incredibly shy. After just one term here, she volunteered to give a presentation at school. The
+                        confidence she's built is priceless."</p>
+                    <div class="flex items-center gap-4">
+                        <img src="images/theatre (7).jpg" alt="Sarah Mitchell"
+                            class="w-12 h-12 rounded-full object-cover border-2 border-[var(--border-color)] shadow-sm">
+                        <div>
+                            <h4 class="font-bold text-[var(--text-main)] text-sm">Sarah Mitchell</h4>
+                            <span class="text-[var(--text-muted)] text-xs">Parent of 8-year-old</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="bg-[var(--bg-secondary)] p-8 rounded-3xl border border-[var(--border-color)] relative">
+                    <i
+                        class="fas fa-quote-left absolute top-6 right-8 text-4xl text-[var(--border-color)] opacity-50"></i>
+                    <div class="flex text-yellow-400 text-sm mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-[var(--text-main)] font-medium leading-relaxed mb-6">"The instructors are actual
+                        professionals working in the industry, and they treat the kids with such respect. The
+                        end-of-year musical was Broadway quality!"</p>
+                    <div class="flex items-center gap-4">
+                        <img src="images/theatre (8).jpg" alt="David Ramirez"
+                            class="w-12 h-12 rounded-full object-cover border-2 border-[var(--border-color)] shadow-sm">
+                        <div>
+                            <h4 class="font-bold text-[var(--text-main)] text-sm">David Ramirez</h4>
+                            <span class="text-[var(--text-muted)] text-xs">Parent of 14-year-old</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div
+                    class="bg-[var(--bg-secondary)] p-8 rounded-3xl border border-[var(--border-color)] relative hidden lg:block">
+                    <i
+                        class="fas fa-quote-left absolute top-6 right-8 text-4xl text-[var(--border-color)] opacity-50"></i>
+                    <div class="flex text-yellow-400 text-sm mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-[var(--text-main)] font-medium leading-relaxed mb-6">"We've tried sports, music
+                        lessons, and art classes. This is the only place my son begs to go back to every single week.
+                        Truly a wonderful community."</p>
+                    <div class="flex items-center gap-4">
+                        <img src="images/theatre (9).jpg" alt="Amanda Jenkins"
+                            class="w-12 h-12 rounded-full object-cover border-2 border-[var(--border-color)] shadow-sm">
+                        <div>
+                            <h4 class="font-bold text-[var(--text-main)] text-sm">Amanda Jenkins</h4>
+                            <span class="text-[var(--text-muted)] text-xs">Parent of 10-year-old</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= EXTRA SECTION 3: CALL TO ACTION ================= -->
+    <section
+        class="py-20 lg:py-24 relative overflow-hidden bg-gradient-to-br from-[var(--accent-dark)] to-purple-800 border-b border-[var(--border-color)]">
+        <!-- Abstract Shapes -->
+        <div
+            class="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2">
+        </div>
+        <div
+            class="absolute bottom-0 left-0 w-80 h-80 bg-black opacity-10 rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2">
+        </div>
+
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+            <h2 class="text-3xl md:text-5xl font-black text-white mb-6 leading-tight">Ready for Your Child to Take the
+                Stage?</h2>
+            <p class="text-indigo-100 text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed">Enrollment for the
+                upcoming Fall term is now open. Secure your spot today and watch their creativity soar!</p>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="signup.html"
+                    class="btn bg-white !text-[var(--accent-dark)] hover:bg-gray-100 !py-4 !px-10 text-sm shadow-xl hover:scale-105">
+                    Enroll Now
+                </a>
+                <a href="schedule.html"
+                    class="btn border-2 border-white/30 text-white hover:bg-white/10 !py-4 !px-10 text-sm bg-transparent">
+                    View Class Schedule
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-10 pt-4">
+                <div class="lg:col-span-4">
+                    <div class="mb-6">
+                        <a href="index.html"
+                            class="inline-flex items-center gap-3 text-2xl font-bold tracking-widest uppercase"
+                            style="color: var(--text-main) !important; text-decoration: none;">
+                            <i class="fas fa-masks-theater text-indigo-500 text-3xl"
+                                style="color: var(--accent-color, #6366F1);"></i>
+                            Kids Theater
+                        </a>
+                    </div>
+                    <p class="opacity-80 leading-relaxed text-sm font-medium mb-8 max-w-sm"
+                        style="color: var(--text-muted);">
+                        Empowering children through the magic of theater. We turn creativity into confidence with
+                        engaging drama workshops and live stage performances.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="social-link-circle"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link-circle"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link-circle"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link-circle"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="lg:col-span-8">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+                        <div>
+                            <h4>Parent Portal</h4>
+                            <ul class="space-y-4">
+                                <li><a href="signup.html">Parent signup</a></li>
+                                <li><a href="user.html">My Dashboard</a></li>
+                                <li><a href="#">Class Schedules</a></li>
+                                <li><a href="schedule.html">Tuition & Fees</a></li>
+                                <li><a href="faq.html">Help Center</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>Our Programs</h4>
+                            <ul class="space-y-4">
+                                <li><a href="services.html">Beginner Acting</a></li>
+                                <li><a href="services.html">Musical Theater</a></li>
+                                <li><a href="services.html">Improv Workshops</a></li>
+                                <li><a href="services.html">Summer Camps</a></li>
+                                <li><a href="services.html">Stage Production</a></li>
+                            </ul>
+                        </div>
+                        <div class="sm:col-span-2 md:col-span-1">
+                            <h4>Studio Location</h4>
+                            <ul class="space-y-4 text-[var(--text-muted)] text-sm font-medium">
+                                <li class="flex items-start gap-4"><i class="fas fa-map-marker-alt mt-1 shrink-0"
+                                        style="color: var(--accent-color);"></i><span>123 Theater Lane<br>Creative Arts
+                                        District, CA 90210</span></li>
+                                <li class="flex items-center gap-4"><i class="fas fa-phone shrink-0"
+                                        style="color: var(--accent-color);"></i><a href="tel:+15550198"
+                                        class="break-all hover:text-[var(--accent-color)]">+1 (555) 800-PLAY</a></li>
+                                <li class="flex items-center gap-4"><i class="fas fa-envelope shrink-0"
+                                        style="color: var(--accent-color);"></i><a href="contact.html"
+                                        class="break-all hover:text-[var(--accent-color)]">hello@kidstheater.com</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="footer-bottom flex flex-col md:flex-row justify-between items-center text-xs gap-6 font-semibold uppercase tracking-widest">
+                <p style="color: var(--text-muted);">&copy; 2026 Kids Theater & Drama Workshop. All rights reserved.</p>
+                <div class="flex flex-wrap justify-center gap-6 sm:gap-8">
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Child Safety Guidelines</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= JAVASCRIPT ================= -->
+    <script>
+        // Floating Navbar logic
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('main-nav');
+            if (window.scrollY > 20) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu toggle logic
+        const mobileBtn = document.getElementById('mobile-btn');
+        const fullscreenMenu = document.getElementById('fullscreen-menu');
+        const closeMenu = document.getElementById('close-menu');
+        const drawerOverlay = document.getElementById('drawer-overlay');
+
+        function toggleMenu() {
+            fullscreenMenu.classList.toggle('active');
+            drawerOverlay.classList.toggle('active');
+            document.body.style.overflow = fullscreenMenu.classList.contains('active') ? 'hidden' : 'auto';
+        }
+
+        mobileBtn.onclick = toggleMenu;
+        closeMenu.onclick = toggleMenu;
+        drawerOverlay.onclick = toggleMenu;
+
+        // Theme logic
+        const themeDesktop = document.getElementById('theme-toggle-desktop');
+        const themeMobile = document.getElementById('theme-toggle-mobile');
+        const iconDesktop = document.getElementById('theme-icon-desktop');
+        const iconMobile = document.getElementById('theme-icon-mobile');
+        const theme = localStorage.getItem('theme') || 'light';
+
+        function updateThemeUI(isDark) {
+            if (isDark) {
+                document.body.classList.add('dark-mode');
+                if (iconDesktop) iconDesktop.className = 'fas fa-sun';
+                if (iconMobile) iconMobile.className = 'fas fa-sun';
+            } else {
+                document.body.classList.remove('dark-mode');
+                if (iconDesktop) iconDesktop.className = 'fas fa-moon';
+                if (iconMobile) iconMobile.className = 'fas fa-moon';
+            }
+        }
+
+        updateThemeUI(theme === 'dark');
+
+        function toggleTheme() {
+            const isDark = !document.body.classList.contains('dark-mode');
+            updateThemeUI(isDark);
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+
+        themeDesktop.onclick = toggleTheme;
+        if (themeMobile) themeMobile.onclick = toggleTheme;
+
+        // RTL/LTR logic
+        const rtlBtn = document.getElementById('rtl-btn');
+        const rtlMobile = document.getElementById('rtl-toggle-mobile');
+        const dir = localStorage.getItem('dir') || 'ltr';
+
+        function updateRTLUI(currentDir) {
+            const isRTL = currentDir === 'rtl';
+            if (rtlBtn) rtlBtn.innerText = isRTL ? 'RTL' : 'LTR';
+            if (rtlMobile) rtlMobile.innerText = isRTL ? 'RTL' : 'LTR';
+        }
+
+        if (dir === 'rtl') { document.documentElement.dir = 'rtl'; }
+        updateRTLUI(dir);
+
+        function toggleRTL() {
+            const isRTL = document.documentElement.dir === 'rtl';
+            const newDir = isRTL ? 'ltr' : 'rtl';
+            document.documentElement.dir = newDir;
+            localStorage.setItem('dir', newDir);
+            updateRTLUI(newDir);
+        }
+
+        if (rtlBtn) rtlBtn.onclick = toggleRTL;
+        if (rtlMobile) rtlMobile.onclick = toggleRTL;
+
+        // FAQ Accordion Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const faqButtons = document.querySelectorAll('.faq-question');
+
+            faqButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const answer = button.nextElementSibling;
+                    const icon = button.querySelector('.faq-icon');
+                    const isActive = button.classList.contains('active');
+
+                    // Optional: Close all other accordions
+                    faqButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.querySelector('.faq-icon').style.transform = 'rotate(0deg)';
+                        btn.nextElementSibling.style.maxHeight = null;
+                    });
+
+                    // If it wasn't active, open it
+                    if (!isActive) {
+                        button.classList.add('active');
+                        icon.style.transform = 'rotate(180deg)';
+                        answer.style.maxHeight = answer.scrollHeight + "px";
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
