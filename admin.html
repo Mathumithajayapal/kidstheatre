@@ -1018,6 +1018,10 @@
                 padding-top: 4.5rem;
             }
         }
+    
+        body.dark-mode .nav-link {
+            color: #cbd5e1;
+        }
     </style>
 </head>
 
@@ -1061,7 +1065,7 @@
                             Settings</span></a></li>
             </ul>
 
-            <a href="#" class="sidebar-action-btn logout-btn" id="logoutBtn">
+            <a href="register.html" class="sidebar-action-btn logout-btn" id="logoutBtn">
                 <i class="fas fa-sign-out-alt"></i>
                 <span>Logout</span>
             </a>
@@ -1406,11 +1410,9 @@
 
         const logoutBtn = document.getElementById('logoutBtn');
         if (logoutBtn) {
-            logoutBtn.addEventListener('click', (e) => {
-                e.preventDefault();
+            logoutBtn.addEventListener('click', () => {
                 sessionStorage.removeItem('adminLoggedIn');
-                alert('🔐 You have been successfully logged out.');
-                window.location.href = 'signup.html';
+                window.location.href = 'register.html';
             });
         }
 
