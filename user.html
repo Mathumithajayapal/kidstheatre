@@ -115,6 +115,11 @@
             border-color: #3a3a4a;
             color: #f1f5f9;
         }
+        
+        body.dark-mode .top-header {
+            background-color: #0f0f0f; /* Match dark body bg */
+            border-bottom: 1px solid #2d2d3a;
+        }
 
         /* Sidebar */
         .sidebar {
@@ -294,7 +299,7 @@
         .main-content {
             flex: 1;
             margin-left: 315px;
-            padding: 1.5rem 2rem;
+            padding: 0 2rem 2rem 2rem; /* Adjusted padding top to accommodate sticky header */
             transition: margin-left 0.3s ease;
             min-height: 100vh;
             min-width: 0;
@@ -306,8 +311,7 @@
         @media (max-width: 768px) {
             .main-content {
                 margin-left: 0;
-                padding: 1rem;
-                padding-top: 70px;
+                padding: 0 1rem 1rem 1rem;
             }
         }
 
@@ -405,7 +409,7 @@
             }
         }
 
-        /* Top Header */
+        /* Top Header - Now Sticky */
         .top-header {
             display: flex;
             justify-content: space-between;
@@ -413,6 +417,18 @@
             margin-bottom: 2rem;
             flex-wrap: wrap;
             gap: 1rem;
+            position: sticky;
+            top: 0;
+            background-color: #f8fafc; /* Match light body bg */
+            z-index: 900;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #eef2ff;
+        }
+        
+        @media (max-width: 768px) {
+            .top-header {
+                padding-top: 70px; /* Space for mobile menu button */
+            }
         }
 
         @media (max-width: 768px) {

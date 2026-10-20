@@ -76,6 +76,14 @@
             --menu-hover-bg: rgba(99, 102, 241, 0.1);
         }
 
+        body.dark-mode input[type="date"] {
+            color-scheme: dark;
+        }
+
+        body.dark-mode input[type="date"] {
+            color-scheme: dark;
+        }
+
         [dir="rtl"] {
             text-align: right;
         }
@@ -152,12 +160,18 @@
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(99, 102, 241, 0.15);
             border-radius: 9999px;
-            padding: 0 32px;
+            padding: 0 24px;
             height: 75px;
             display: flex;
             align-items: center;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 10px 40px -10px rgba(99, 102, 241, 0.1);
+        }
+
+        @media (min-width: 1400px) {
+            .navbar {
+                padding: 0 32px;
+            }
         }
 
         body.dark-mode .navbar {
@@ -181,21 +195,30 @@
         }
 
         .nav-link {
-            padding: 8px 4px;
-            margin: 0 14px;
+            padding: 8px 8px;
+            margin: 0 10px;
             color: var(--text-main);
             text-decoration: none;
             font-size: 12px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            white-space: nowrap;
+            gap: 8px;
             cursor: pointer;
             position: relative;
+        }
+
+        @media (min-width: 1280px) and (max-width: 1399px) {
+            .nav-link {
+                margin: 0 6px;
+                padding: 8px 6px;
+                font-size: 11.5px;
+            }
         }
 
         .nav-link::after {
@@ -293,12 +316,14 @@
 
         /* === BUTTONS === */
         .icon-btn {
-            width: 38px;
-            height: 38px;
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            min-height: 40px;
             border-radius: 50%;
             background: var(--bg-secondary);
             color: var(--text-main);
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             font-size: 13px;
@@ -306,6 +331,9 @@
             transition: all 0.3s ease;
             cursor: pointer;
             font-weight: 800;
+            flex-shrink: 0;
+            box-sizing: border-box;
+            line-height: 1;
         }
 
         .icon-btn:hover {
@@ -314,6 +342,36 @@
             border-color: var(--accent-color);
             transform: translateY(-2px);
             box-shadow: 0 4px 10px rgba(99, 102, 241, 0.2);
+        }
+
+        .navbar-cta {
+            height: 40px !important;
+            min-height: 40px !important;
+            max-height: 40px !important;
+            min-width: 96px;
+            padding: 0 20px !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            border-radius: 9999px !important;
+            font-size: 11px !important;
+            font-weight: 700 !important;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            white-space: nowrap !important;
+            flex-shrink: 0 !important;
+            box-sizing: border-box;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-dark));
+            color: #FFFFFF !important;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+            color: #FFFFFF !important;
         }
 
         .btn {
@@ -486,6 +544,13 @@
             padding: 32px 0;
             margin-top: 60px;
         }
+
+        /* Mobile (360px) Hero Section Top Padding Fix */
+        @media (max-width: 640px) {
+            .hero-section {
+                padding-top: 140px !important;
+            }
+        }
     </style>
 </head>
 
@@ -503,7 +568,7 @@
                 </a>
             </div>
 
-            <div class="hidden xl:flex justify-center items-center flex-1">
+            <div class="hidden xl:flex justify-center items-center flex-1 min-w-0">
                 <div class="dropdown">
                     <div class="nav-link">Home <i class="fas fa-chevron-down text-[9px] ml-1 opacity-50"></i></div>
                     <div class="dropdown-menu">
@@ -530,15 +595,15 @@
                 </div>
             </div>
 
-            <div class="hidden xl:flex items-center gap-3">
-                <button id="theme-toggle-desktop" class="icon-btn" title="Toggle Dark Mode">
+            <div class="hidden xl:flex items-center gap-4 flex-shrink-0">
+                <button id="theme-toggle-desktop" class="icon-btn" title="Toggle Dark Mode" aria-label="Toggle Dark Mode">
                     <i class="fas fa-moon" id="theme-icon-desktop"></i>
                 </button>
-                <button id="rtl-btn" class="icon-btn" title="Toggle LTR/RTL">
+                <button id="rtl-btn" class="icon-btn" title="Toggle LTR/RTL" aria-label="Toggle LTR/RTL">
                     LTR
                 </button>
-                <div class="w-px h-6 bg-[var(--border-color)] mx-2"></div>
-                <a href="login.html" class="btn btn-solid !w-[100px] !h-[40px] !p-0 !text-[11px]">Login</a>
+                <div class="w-px h-5 bg-[var(--border-color)] mx-2"></div>
+                <a href="login.html" class="btn btn-solid navbar-cta">Login</a>
             </div>
 
             <div class="xl:hidden flex items-center justify-end gap-4">
@@ -603,7 +668,7 @@
 
     <!-- ================= HERO BANNER (BOOKING SPECIFIC) ================= -->
     <section
-        class="relative w-full min-h-[100dvh] pt-24 md:pt-32 pb-12 md:pb-16 flex items-center overflow-hidden bg-[var(--bg-color)] border-b border-[var(--border-color)]">
+        class="hero-section relative w-full min-h-[100dvh] pt-36 md:pt-32 pb-12 md:pb-16 flex items-center overflow-hidden bg-[var(--bg-color)] border-b border-[var(--border-color)]">
         <!-- Decorative Background Elements -->
         <div
             class="absolute top-20 left-10 w-64 h-64 bg-indigo-300/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob">
@@ -972,7 +1037,7 @@
                     <span class="text-4xl font-black text-[var(--text-main)]">$219.00</span>
                 </div>
                 <div
-                    class="bg-indigo-50 dark:bg-indigo-900/30 rounded-xl p-4 mb-8 flex items-start gap-4 border border-indigo-100 dark:border-indigo-800">
+                    class="bg-[var(--menu-hover-bg)] rounded-xl p-4 mb-8 flex items-start gap-4 border border-[var(--border-color)]">
                     <i class="fas fa-lock text-[var(--accent-color)] mt-1"></i>
                     <p class="text-sm text-[var(--text-main)] leading-relaxed">
                         Payments are securely processed via 256-bit encryption. By confirming, you agree to our <a

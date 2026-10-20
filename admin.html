@@ -421,7 +421,7 @@
             }
         }
 
-        /* Top Bar */
+        /* Top Bar - Now Sticky */
         .top-bar {
             background: white;
             border-radius: 20px;
@@ -434,6 +434,15 @@
             border: 1px solid #eef2ff;
             flex-wrap: wrap;
             gap: 1rem;
+            position: sticky;
+            top: 20px;
+            z-index: 900;
+        }
+
+        @media (max-width: 768px) {
+            .top-bar {
+                top: 10px;
+            }
         }
 
         .page-title h2 {

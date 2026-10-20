@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Schedule - Kids Theater & Drama Workshop</title>
+    <title>Home Page 2 - Kids Theater & Drama Workshop</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon"
         href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none'%3E%3Cpath d='M16 2L20 12L30 12L22 18L25 28L16 22L7 28L10 18L2 12L12 12L16 2Z' fill='%236366F1'/%3E%3C/svg%3E">
@@ -152,12 +152,18 @@
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(99, 102, 241, 0.15);
             border-radius: 9999px;
-            padding: 0 32px;
+            padding: 0 24px;
             height: 75px;
             display: flex;
             align-items: center;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 10px 40px -10px rgba(99, 102, 241, 0.1);
+        }
+
+        @media (min-width: 1400px) {
+            .navbar {
+                padding: 0 32px;
+            }
         }
 
         body.dark-mode .navbar {
@@ -181,21 +187,30 @@
         }
 
         .nav-link {
-            padding: 8px 4px;
-            margin: 0 14px;
+            padding: 8px 8px;
+            margin: 0 10px;
             color: var(--text-main);
             text-decoration: none;
             font-size: 12px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            white-space: nowrap;
+            gap: 8px;
             cursor: pointer;
             position: relative;
+        }
+
+        @media (min-width: 1280px) and (max-width: 1399px) {
+            .nav-link {
+                margin: 0 6px;
+                padding: 8px 6px;
+                font-size: 11.5px;
+            }
         }
 
         .nav-link::after {
@@ -293,12 +308,14 @@
 
         /* === BUTTONS === */
         .icon-btn {
-            width: 38px;
-            height: 38px;
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            min-height: 40px;
             border-radius: 50%;
             background: var(--bg-secondary);
             color: var(--text-main);
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             font-size: 13px;
@@ -306,6 +323,9 @@
             transition: all 0.3s ease;
             cursor: pointer;
             font-weight: 800;
+            flex-shrink: 0;
+            box-sizing: border-box;
+            line-height: 1;
         }
 
         .icon-btn:hover {
@@ -314,6 +334,36 @@
             border-color: var(--accent-color);
             transform: translateY(-2px);
             box-shadow: 0 4px 10px rgba(99, 102, 241, 0.2);
+        }
+
+        .navbar-cta {
+            height: 40px !important;
+            min-height: 40px !important;
+            max-height: 40px !important;
+            min-width: 96px;
+            padding: 0 20px !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            border-radius: 9999px !important;
+            font-size: 11px !important;
+            font-weight: 700 !important;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            white-space: nowrap !important;
+            flex-shrink: 0 !important;
+            box-sizing: border-box;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-dark));
+            color: #FFFFFF !important;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+            color: #FFFFFF !important;
         }
 
         .btn {
@@ -486,6 +536,13 @@
             padding: 32px 0;
             margin-top: 60px;
         }
+
+        /* Mobile (360px) Hero Section Top Padding Fix */
+        @media (max-width: 640px) {
+            .hero-section {
+                padding-top: 140px !important;
+            }
+        }
     </style>
 </head>
 
@@ -503,7 +560,7 @@
                 </a>
             </div>
 
-            <div class="hidden xl:flex justify-center items-center flex-1">
+            <div class="hidden xl:flex justify-center items-center flex-1 min-w-0">
                 <div class="dropdown">
                     <div class="nav-link active">Home <i class="fas fa-chevron-down text-[9px] ml-1 opacity-50"></i>
                     </div>
@@ -531,15 +588,15 @@
                 </div>
             </div>
 
-            <div class="hidden xl:flex items-center gap-3">
-                <button id="theme-toggle-desktop" class="icon-btn" title="Toggle Dark Mode">
+            <div class="hidden xl:flex items-center gap-4 flex-shrink-0">
+                <button id="theme-toggle-desktop" class="icon-btn" title="Toggle Dark Mode" aria-label="Toggle Dark Mode">
                     <i class="fas fa-moon" id="theme-icon-desktop"></i>
                 </button>
-                <button id="rtl-btn" class="icon-btn" title="Toggle LTR/RTL">
+                <button id="rtl-btn" class="icon-btn" title="Toggle LTR/RTL" aria-label="Toggle LTR/RTL">
                     LTR
                 </button>
-                <div class="w-px h-6 bg-[var(--border-color)] mx-2"></div>
-                <a href="login.html" class="btn btn-solid !w-[100px] !h-[40px] !p-0 !text-[11px]">Login</a>
+                <div class="w-px h-5 bg-[var(--border-color)] mx-2"></div>
+                <a href="login.html" class="btn btn-solid navbar-cta">Login</a>
             </div>
 
             <div class="xl:hidden flex items-center justify-end gap-4">
@@ -602,9 +659,9 @@
         </div>
     </div>
 
-    <!-- ================= HERO BANNER (SCHEDULE SPECIFIC) ================= -->
+    <!-- ================= HERO BANNER ================= -->
     <section
-        class="relative w-full min-h-[100dvh] pt-24 md:pt-32 pb-12 md:pb-16 flex items-center overflow-hidden bg-[var(--bg-color)] border-b border-[var(--border-color)]">
+        class="hero-section relative w-full min-h-[100dvh] pt-36 md:pt-32 pb-12 md:pb-16 flex items-center overflow-hidden bg-[var(--bg-color)] border-b border-[var(--border-color)]">
 
         <!-- Decorative Background Elements -->
         <div
@@ -629,85 +686,62 @@
                                 class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
                             <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
                         </span>
-                        Plan Your Theatrical Journey
+                        Spark Creativity & Confidence
                     </span>
 
                     <h1
                         class="text-5xl md:text-6xl lg:text-[4.5rem] font-black leading-[1.1] mb-6 text-[var(--text-main)] tracking-tight">
-                        Class <br>
+                        Step into the <br>
                         <span
-                            class="text-transparent bg-clip-text bg-gradient-to-r from-[var(--accent-color)] to-purple-600">Schedule</span>
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-[var(--accent-color)] to-purple-600">Spotlight</span>
                     </h1>
 
                     <p class="text-[var(--text-muted)] text-lg md:text-xl leading-relaxed font-medium mb-8 max-w-lg">
-                        Find the perfect time for your child to shine. Browse our upcoming semester schedules, weekend
-                        workshops, and holiday camps to find a class that fits your family's routine.
+                        Empower your child through acting, storytelling, and stagecraft. Our interactive drama workshops
+                        build confidence, teamwork, and imagination in a fun, supportive environment.
                     </p>
 
                     <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-10">
-                        <a href="booking.html"
+                        <a href="signup.html"
                             class="btn btn-solid !py-4 !px-8 text-sm flex items-center justify-center gap-2 group">
-                            Book a Class <i
-                                class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                            Enroll Now <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
                         </a>
-                        <a href="#calendar-view"
+                        <a href="services.html"
                             class="btn btn-outline !bg-[var(--bg-card)] !text-[var(--text-main)] hover:!border-[var(--accent-color)] hover:!text-[var(--accent-color)] !py-4 !px-8 text-sm flex items-center justify-center gap-2 shadow-sm">
-                            <i class="fas fa-calendar-alt"></i> View Calendar
+                            <i class="fas fa-star"></i> View Programs
                         </a>
                     </div>
 
                     <!-- Trust Indicators -->
                     <div class="flex items-center gap-6 text-sm text-[var(--text-muted)] font-medium">
                         <div class="flex items-center gap-2">
-                            <i class="fas fa-check-circle text-green-500"></i> After-school Options
+                            <i class="fas fa-check-circle text-green-500"></i> Ages 5-15
                         </div>
                         <div class="flex items-center gap-2">
-                            <i class="fas fa-check-circle text-green-500"></i> Weekend Classes
+                            <i class="fas fa-check-circle text-green-500"></i> Expert Coaches
                         </div>
                         <div class="flex items-center gap-2">
-                            <i class="fas fa-check-circle text-green-500"></i> Holiday Camps
+                            <i class="fas fa-check-circle text-green-500"></i> End-of-term Show
                         </div>
                     </div>
                 </div>
 
-                <!-- Responsive Image Composition (4 Square Grid with 1 Center Image) -->
-                <div class="relative w-full h-auto lg:h-[650px] flex items-center justify-center mt-10 lg:mt-0">
-                    <div class="relative w-full max-w-[500px] aspect-square">
-
-                        <!-- The 2x2 Grid of 4 Images -->
-                        <div class="grid grid-cols-2 grid-rows-2 gap-4 lg:gap-6 w-full h-full">
-                            <!-- Top Left -->
-                            <div
-                                class="w-full h-full rounded-[30px] overflow-hidden shadow-lg border-4 border-[var(--bg-card)] transform hover:-translate-y-1 transition-transform duration-300">
-                                <img src="images/theatre (4).jpg" alt="Acting class schedule"
-                                    class="w-full h-full object-cover">
-                            </div>
-                            <!-- Top Right -->
-                            <div
-                                class="w-full h-full rounded-[30px] overflow-hidden shadow-lg border-4 border-[var(--bg-card)] transform hover:-translate-y-1 transition-transform duration-300">
-                                <img src="images/theatre (5).jpg" alt="Kids performing"
-                                    class="w-full h-full object-cover">
-                            </div>
-                            <!-- Bottom Left -->
-                            <div
-                                class="w-full h-full rounded-[30px] overflow-hidden shadow-lg border-4 border-[var(--bg-card)] transform hover:-translate-y-1 transition-transform duration-300">
-                                <img src="images/theatre (6).jpg" alt="Theater stage"
-                                    class="w-full h-full object-cover">
-                            </div>
-                            <!-- Bottom Right -->
-                            <div
-                                class="w-full h-full rounded-[30px] overflow-hidden shadow-lg border-4 border-[var(--bg-card)] transform hover:-translate-y-1 transition-transform duration-300">
-                                <img src="images/theatre (7).jpg" alt="Drama props" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-
-                        <!-- Center Overlapping Image -->
-                        <div
-                            class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[45%] h-[45%] rounded-[30px] overflow-hidden shadow-2xl border-4 border-[var(--bg-card)] z-30 lg:animate-float">
-                            <img src="images/theatre (8).jpg" alt="Theater workshop in action"
-                                class="w-full h-full object-cover">
-                        </div>
-
+                <!-- Responsive Image Composition -->
+                <div
+                    class="relative w-full h-auto lg:h-[650px] flex flex-col lg:flex-row lg:items-center lg:justify-center mt-10 lg:mt-0 gap-6 lg:gap-0">
+                    <div
+                        class="relative lg:absolute w-full lg:w-[75%] h-[300px] sm:h-[400px] lg:h-[80%] rounded-[40px] overflow-hidden shadow-2xl border-4 border-[var(--bg-card)] z-20 transform lg:hover:-translate-y-2 transition-transform duration-500">
+                        <img src="images/theatre (4).jpg" alt="Kids performing on stage"
+                            class="w-full h-full object-cover">
+                    </div>
+                    <div
+                        class="relative lg:absolute lg:top-0 lg:right-0 w-full lg:w-[45%] h-[250px] sm:h-[300px] lg:h-[45%] rounded-[30px] overflow-hidden shadow-xl border-4 border-[var(--bg-card)] z-30 transform lg:hover:-translate-y-2 transition-transform duration-500 lg:animate-float">
+                        <img src="images/theatre (5).jpg" alt="Drama Costumes and Props"
+                            class="w-full h-full object-cover">
+                    </div>
+                    <div
+                        class="relative lg:absolute lg:bottom-4 lg:left-0 w-full lg:w-[40%] h-[250px] sm:h-[300px] lg:h-[40%] rounded-[30px] overflow-hidden shadow-xl border-4 border-[var(--bg-card)] z-30 transform lg:hover:-translate-y-2 transition-transform duration-500 lg:animate-float animation-delay-2000">
+                        <img src="images/theatre (6).jpg" alt="Theater Curtains" class="w-full h-full object-cover">
                     </div>
                 </div>
 
